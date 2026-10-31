@@ -2413,36 +2413,312 @@
     }, 400);
   }
 
-  function generateThingResponse(input) {
+  function generateThingResponse(rawInput) {
+    const input = (rawInput || '').toLowerCase().trim();
     const curProg = gameState.caseProgress[currentCaseId];
 
-    // Jumpscare easter egg if user prompts scary words!
-    if (input.includes('jumpscare') || input.includes('scare') || input.includes('demon') || input.includes('ghost')) {
+    // 1. Jumpscare Easter Egg
+    if (input.includes('jumpscare') || input.includes('scare') || input.includes('demon') || input.includes('ghost') || input.includes('screech')) {
       triggerJumpscare('"YOU DARED TO SUMMON THE MACABRE!"');
       return {
-        text: "*Thing hides behind an inkwell trembling* You poked the void too hard! Be careful what you summon in Nevermore after hours!",
-        action: '*Thing taps frantically in warning*'
+        text: "*Thing hides behind an antique inkwell trembling* You poked the void too recklessly! Never utter summoning incantations in Nevermore after hours!",
+        action: '*Thing taps frantically on the mahogany desk in warning*'
       };
     }
 
-    if (input.includes('hint') || input.includes('who') || input.includes('culprit')) {
+    // 2. Secret of the Ancient Void Door
+    if (input.includes('door') || input.includes('keyhole') || input.includes('freestanding') || input.includes('portal')) {
+      return {
+        text: "*Thing gestures solemnly towards the void horizon* That ancient door has floated in zero-gravity since Nevermore was founded. It leads to the deepest shadow dimensions. Wednesday strictly forbids peering into its keyhole—unless you want a terrifying visage to leap out at you!",
+        action: '*Thing draws a protective sigil in the air*'
+      };
+    }
+
+    // 3. Where are the Clues in 3D / How to Find Evidence
+    if ((input.includes('where') && (input.includes('clue') || input.includes('evidence') || input.includes('find') || input.includes('look') || input.includes('search'))) ||
+        input.includes('how to find') || input.includes('how do i find') || input.includes('coordinates') || input.includes('3d room') || input.includes('location')) {
+      const clue1 = CASE_DATA.clues.footprint;
+      const clue2 = CASE_DATA.clues.letter;
+      const clue3 = CASE_DATA.clues.register;
+      return {
+        text: `*Thing points four fingers in spatial coordinates across <strong>${CASE_DATA.title}</strong>:*<br><br>` +
+              `🔍 <strong>1. ${clue1.name}:</strong> Floating on the <em>left void dais edge</em> (X: ${clue1.locationIn3D.x}, Y: ${clue1.locationIn3D.y}, Z: ${clue1.locationIn3D.z})<br>` +
+              `📜 <strong>2. ${clue2.name}:</strong> Drifting high among the <em>zero-gravity books on the right</em> (X: ${clue2.locationIn3D.x}, Y: ${clue2.locationIn3D.y}, Z: ${clue2.locationIn3D.z})<br>` +
+              `📖 <strong>3. ${clue3.name}:</strong> Suspended near the <em>ancient void door at the rear</em> (X: ${clue3.locationIn3D.x}, Y: ${clue3.locationIn3D.y}, Z: ${clue3.locationIn3D.z})<br><br>` +
+              `<em>💡 Detective Tip:</em> Click the <strong>"Focus Clues"</strong> or <strong>"Void Orbit"</strong> preset buttons in the 3D room to auto-aim your camera!`,
+        action: '*Thing scuttles across a star chart indicating glowing positions*'
+      };
+    }
+
+    // 4. Culprit, Motive & Solution Inquiries
+    if (input.includes('who did it') || input.includes('who is the culprit') || input.includes('who is guilty') || input.includes('who stole') || input.includes('who poisoned') || input.includes('who is lying') || input.includes('solution') || input.includes('who is suspicious') || input.includes('verdict')) {
+      const culprit = CASE_DATA.suspects[CASE_DATA.solution.culpritId];
+      const decisive = CASE_DATA.clues[CASE_DATA.solution.decisiveEvidence];
+      return {
+        text: `*Thing leans in and taps decisively on the case file* In <strong>${CASE_DATA.title}</strong>, all forensic vectors point to <strong>${culprit.name} (${culprit.role})</strong>!<br><br>` +
+              `⚖️ <strong>Criminal Motive:</strong> ${CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase()}<br>` +
+              `🔎 <strong>Decisive Physical Proof:</strong> The <em>${decisive.name}</em>, which directly shatters their alibi.<br>` +
+              `💀 <strong>Wednesday's Deduction:</strong> ${CASE_DATA.solution.explanation}`,
+        action: '*Thing points an accusing finger directly at the culprit profile*'
+      };
+    }
+
+    if (input.includes('motive') || input.includes('why')) {
       const culprit = CASE_DATA.suspects[CASE_DATA.solution.culpritId];
       return {
-        text: `*scuttles across the desk* In ${CASE_DATA.title}, look closely at who possesses specialized clearance or supplies. The culprit is currently acting defensive under interrogation!`,
-        action: '*Thing taps three fingers deliberately: one, two, three*'
+        text: `*Thing scuttles between witness testimonies* The criminal motive in <strong>${CASE_DATA.title}</strong> is <strong>${CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase()}</strong>. ` +
+              `<strong>${culprit.name}</strong> acted with cold premeditation. Confront them with physical clues in the Interrogation Chamber to break their composure!`,
+        action: '*Thing mimics counting stolen gold coins and whispers*'
       };
     }
 
-    if (input.includes('door') || input.includes('void')) {
+    // 5. Forensic Crime Lab Tools (UV, Reagent, Pinboard)
+    if (input.includes('uv') || input.includes('blacklight') || input.includes('ultraviolet')) {
       return {
-        text: "*points toward the infinite void* That ancient freestanding door has stood in the void since Nevermore was founded. Do NOT tamper with its keyhole unless you enjoy horrific surprises!",
-        action: '*Thing gestures ominously towards the 3D void*'
+        text: `*Thing flicks on a miniature 365nm UV torch* The UV Blacklight excitation reveals hidden latent fingerprints, fluorescent chemical bleaching halos, and synthetic fiber glowing tags invisible to the naked eye. Always scan your evidence in the Evidence Dossier!`,
+        action: '*Thing shines a luminescent purple beam across the desk*'
       };
     }
 
+    if (input.includes('reagent') || input.includes('chemical test') || input.includes('acid') || input.includes('drop test')) {
+      return {
+        text: `*Thing balances an eyedropper of reagent acid* The chemical reagent drop tests confirm chemical molecular compounds—such as potassium permanganate oxidizers, deadly nightshade alkaloids, or Prussian blue iron ink developers. Use the "Reagent Test" button in the Evidence Notebook to achieve 99%+ forensic certainty!`,
+        action: '*Thing carefully drops chemical reagent into a miniature vial*'
+      };
+    }
+
+    if (input.includes('pinboard') || input.includes('string') || input.includes('conspiracy') || input.includes('connect')) {
+      return {
+        text: `*Thing winds a spool of crimson yarn* On the <strong>Detective String Pinboard</strong>, click a collected clue on the left, then click the suspect you suspect is linked to it on the right. If the forensic match is confirmed, you will score +50 points and lock the deduction into your dossier! Points are awarded once per valid connection.`,
+        action: '*Thing threads red yarn between copper pins*'
+      };
+    }
+
+    // 6. Specific Clue Analysis (Checking all clues across cases)
+
+    // CASE 1 CLUES
+    if (input.includes('footprint') || input.includes('tread') || input.includes('size 11') || input.includes('orthopedic') || input.includes('muddy')) {
+      return {
+        text: `*Thing examines the mud cast with a brass caliper* <strong>Muddy Diamond-Tread Footprint (Case 1):</strong> Size 11 bespoke orthopedic boot sole coated with potassium permanganate (KMnO4) and sulfur salt dust from the West Alchemy Lab. Julian Crane wears size 9 flat canvas creepers; Madam Vance wears size 6 boots. It directly matches <strong>Dr. Arthur Graves</strong>!`,
+        action: '*Thing measures sole ridges with precision*'
+      };
+    }
+
+    if (input.includes('torn letter') || input.includes('charred letter') || input.includes('wax seal') || input.includes('raven') || input.includes('signet')) {
+      return {
+        text: `*Thing holds the scorched vellum up to candlelight* <strong>Charred Torn Letter & Wax Seal (Case 1):</strong> The cracked purple wax depicts an alchemy flask intertwined with a raven—the personal heraldic crest of the Dark Antiquities Dept. 365nm UV blacklight reveals Dr. Arthur Graves' thumbprint pressed into the scorched wax margin!`,
+        action: '*Thing inspects the cracked raven wax seal*'
+      };
+    }
+
+    if (input.includes('register') || input.includes('ledger') || input.includes('bleach') || input.includes('11:58') || input.includes('initials') || input.includes('a.g.')) {
+      return {
+        text: `*Thing traces the faded iron-gall parchment* <strong>Altered Library Register Ledger (Case 1):</strong> The 11:58 PM archive entry was dissolved using acidic lab solvent. Under 365nm UV or Prussian blue reagent drop test, the dissolved iron ions fluoresce, revealing the initials <strong>"A.G." (Arthur Graves)</strong> checking out the Codex Nocturna right before midnight!`,
+        action: '*Thing brushes Prussian blue developer across the ledger*'
+      };
+    }
+
+    // CASE 2 CLUES
+    if (input.includes('chalice') || input.includes('tea') || input.includes('belladonna') || input.includes('nightshade') || input.includes('atropine') || input.includes('poison') || input.includes('hemlock')) {
+      return {
+        text: `*Thing taps the gilded porcelain rim warningly* <strong>Poisoned Black Porcelain Chalice (Case 2):</strong> Dried purple drops contain a lethal hybrid alkaloid of Atropa belladonna (nightshade) and Cicuta maculata (water hemlock). Under UV light, the atropine glows vibrant yellow-green. This hybrid can only be grown inside Greenhouse 3!`,
+        action: '*Thing nudges the poisoned chalice away with a wooden ruler*'
+      };
+    }
+
+    if (input.includes('roster') || input.includes('seed vault') || input.includes('seed safe') || input.includes('batch iv')) {
+      return {
+        text: `*Thing flips open the botanical vault log* <strong>Greenhouse Seed Vault Roster (Case 2):</strong> Shows 3 packets of hybrid nightshade seeds were removed at 4:30 PM. The signature was torn away with fingernail shears, but ESDA carbon lifting and UV lighting reveal the indented signature: <em>"M. Thornhill - Belladonna Batch IV"</em>. Only Marilyn Thornhill holds the key!`,
+        action: '*Thing uses pencil shading to reveal indented handwriting*'
+      };
+    }
+
+    if (input.includes('glove') || input.includes('drosera') || input.includes('carnivorous') || input.includes('sap') || input.includes('soil') || input.includes('horticultural')) {
+      return {
+        text: `*Thing holds up the velvet gardening glove* <strong>Soil-Stained Horticultural Glove (Case 2):</strong> Found concealed behind the bell tower copper pipes, it is coated in fresh 4:30 PM rain soil and sticky neon coral pink digestive enzymes from Drosera carnivorous orchids. Drosera orchids are grown exclusively by <strong>Marilyn Thornhill</strong>!`,
+        action: '*Thing tests sticky Drosera sap on a glass slide*'
+      };
+    }
+
+    // CASE 3 CLUES
+    if (input.includes('fracture') || input.includes('gargoyle') || input.includes('acoustic') || input.includes('resonance') || input.includes('432 hz') || input.includes('sound wave') || input.includes('shear')) {
+      return {
+        text: `*Thing taps the sheared limestone* <strong>Resonant Acoustic Stone Fracture (Case 3):</strong> The two-ton gargoyle did not fall from hammer or chisel blows—the fracture face is glassy and smooth. Piezoelectric analysis proves high-frequency acoustic standing wave shearing (432 Hz to 14,000 Hz). Only an acoustic Siren song can shear solid limestone!`,
+        action: '*Thing taps tuning forks together listening to the hum*'
+      };
+    }
+
+    if (input.includes('tuning fork') || input.includes('silver fork') || input.includes('fork') || input.includes('barclay crest')) {
+      return {
+        text: `*Thing rings the silver prongs* <strong>Silver Siren Acoustic Tuning Fork (Case 3):</strong> Stamped with 432 Hz and engraved with the Barclay Siren Choral crest, this heavy silver instrument was recovered from the parapet gutter. Silver nitrate testing confirms marine sea-salt perspiration from Siren touch. It belongs to <strong>Bianca Barclay</strong>!`,
+        action: '*Thing holds the vibrating tuning fork near his palm*'
+      };
+    }
+
+    if (input.includes('scarf') || input.includes('sea-silk') || input.includes('blue silk') || input.includes('byssus')) {
+      return {
+        text: `*Thing drapes the blue iridescent filament* <strong>Torn Blue Silk Siren Scarf (Case 3):</strong> Snagged on the gargoyle's stone talon, this fabric is genuine Mediterranean byssus mollusk sea-silk. It matches Bianca Barclay's signature concert choir scarf. Under interrogation, her throat muscles are visibly strained from singing at destructive frequencies!`,
+        action: '*Thing examines blue sea-silk threads under magnification*'
+      };
+    }
+
+    // CASE 4 CLUES
+    if (input.includes('dahlia') || input.includes('black dahlia') || input.includes('palette knife') || input.includes('linseed')) {
+      return {
+        text: `*Thing inspects the dark velvety petals* <strong>Scalpel-Trimmed Black Dahlia (Case 4):</strong> Left atop Goody Addams' sarcophagus at 2:00 AM, the stem was cut at a precise 45-degree angle with an artist's flexible palette knife coated in linseed oil and turpentine. The solvent profile matches Rembrandt Artist Oils from <strong>Xavier Thorpe's</strong> shed studio!`,
+        action: '*Thing gently holds the severed midnight dahlia*'
+      };
+    }
+
+    if (input.includes('sketch') || input.includes('charcoal') || input.includes('prophetic') || input.includes('vision') || input.includes('goody addams') || input.includes('skull')) {
+      return {
+        text: `*Thing unrolls the charcoal parchment* <strong>Prophetic Charcoal Sketch (Case 4):</strong> Dropped in the crypt weeds, this hyper-realistic sketch depicts the breached Crackstone tomb with glowing eyes—drawn at 10:00 PM hours before the crime occurred! UV light reveals Xavier Thorpe's psychic monogram <em>"XT"</em>!`,
+        action: '*Thing traces the charcoal tomb drawing*'
+      };
+    }
+
+    if (input.includes('rag') || input.includes('paint rag') || input.includes('turpentine') || input.includes('burnt umber') || input.includes('cemetery mud')) {
+      return {
+        text: `*Thing holds the soiled linen with brass tongs* <strong>Turpentine Paint Rag & Cemetery Mud (Case 4):</strong> Soaked in artist-grade gum turpentine, Burnt Umber oil pigment, and red Crackstone cemetery clay. Xavier Thorpe was found with wet Burnt Umber paint and red cemetery clay caked directly under his fingernails!`,
+        action: '*Thing pinches his non-existent nose at the turpentine smell*'
+      };
+    }
+
+    // CASE 5 CLUES
+    if (input.includes('claw') || input.includes('hyde') || input.includes('beast') || input.includes('cashmere') || input.includes('glass') || input.includes('shredded')) {
+      return {
+        text: `*Thing compares claw gouges to a ruler* <strong>Shredded Reinforced Glass & Beast Claws (Case 5):</strong> 14-inch monster palm claw gouges shattered the dispensary at 3:15 AM. Snagged in the glass shards are fine beige Italian cashmere fibers coated in Yardley English Lavender perfume and Hydral-4. It matches <strong>Dr. Valerie Kinbott's</strong> overcoat, which has a torn left hem!`,
+        action: '*Thing matches the cashmere fiber to a fabric swatch*'
+      };
+    }
+
+    if (input.includes('sedative') || input.includes('hydral') || input.includes('hydral-4') || input.includes('ampoule') || input.includes('dispensary')) {
+      return {
+        text: `*Thing points at the amber medicinal glass* <strong>Shattered Hydral-4 Ampoule (Case 5):</strong> A high-potency neuro-chemical cocktail designed to dissolve conscious restraint and induce monstrous transformations. It could only be unlocked from the toxic safe using the psychological clinic master authorization code, held by Dr. Kinbott!`,
+        action: '*Thing taps the fractured amber ampoule neck*'
+      };
+    }
+
+    if (input.includes('tape') || input.includes('cassette') || input.includes('dictaphone') || input.includes('hypnosis') || input.includes('hypnotherapy') || input.includes('awaken') || input.includes('pet')) {
+      return {
+        text: `*Thing hits play on the miniature recorder* <strong>Hypnotherapy Dictaphone Cassette (Case 5):</strong> Micro-cassette recovered from the clinic floor. Under voice spectrogram harmonic analysis, Dr. Valerie Kinbott's voice repeats: <em>"When the moon crests, the beast obeys. Awaken, my pet."</em> Tyler confirms she used a gold pocket watch to hypnotize him!`,
+        action: '*Thing mimics a spinning hypnotic gold pocket watch*'
+      };
+    }
+
+    // 7. Suspect Profiles (Specific suspect questions)
+    if (input.includes('graves') || input.includes('arthur')) {
+      return {
+        text: `*Thing scuttles over Dr. Graves' dossier* <strong>Dr. Arthur Graves (Alchemist):</strong> Master of Dark Antiquities. Claims he was distilling mandrake resin, but his size 11 diamond-tread boots left mud at the scene, his raven seal marked the scorched note, and his lab solvents erased the ledger at 11:58 PM. He is GUILTY in Case 1!`,
+        action: '*Thing stamps a big red VOID over Graves*'
+      };
+    }
+
+    if (input.includes('vance') || input.includes('thalia') || input.includes('librarian')) {
+      return {
+        text: `*Thing straightens an imaginary cardigan* <strong>Madam Thalia Vance (Archivist):</strong> Strict guardian of the archives. Wears size 6 Victorian boots and was in her cottage nursing a migraine with chamomile tea. She is forensically innocent of stealing the Codex!`,
+        action: '*Thing sips invisible tea politely*'
+      };
+    }
+
+    if (input.includes('julian') || input.includes('crane')) {
+      return {
+        text: `*Thing sketches shadows on the desk* <strong>Julian Crane (Student):</strong> Brooding outcast scholar. He was sketching gargoyles in the courtyard; his fingers have charcoal dust, not violet chemical salts, and his shoes have smooth canvas soles with zero tread. He is innocent!`,
+        action: '*Thing charcoal sketches a gargoyle*'
+      };
+    }
+
+    if (input.includes('thornhill') || input.includes('marilyn')) {
+      return {
+        text: `*Thing scuttles back in alarm* <strong>Marilyn Thornhill (Botanist):</strong> Cheerful exterior hiding deadly venom. She checked out 3 packets of belladonna from Greenhouse 3 at 4:30 PM, and her Drosera orchid-stained gardening glove was hidden in the bell tower pipes. She is GUILTY of poisoning Weems in Case 2!`,
+        action: '*Thing snips imaginary pruning shears menacingly*'
+      };
+    }
+
+    if (input.includes('stone') || input.includes('vladislaus') || input.includes('fencer')) {
+      return {
+        text: `*Thing salutes with a rapier gesture* <strong>Vladislaus Stone (Fencing Master):</strong> Rigid swordsman. He was in the armory oiling sabers. His hands smell of mineral oil and steel, not toxic alkaloids. He is innocent!`,
+        action: '*Thing executes an elegant fencing parry*'
+      };
+    }
+
+    if (input.includes('enid') || input.includes('sinclair') || input.includes('roommate')) {
+      return {
+        text: `*Thing flashes peace signs* <strong>Enid Sinclair (Werewolf):</strong> Wednesday's colorful roommate. She was filming a TikTok dance live stream from 4:15 to 5:10 PM in the quad, which proves her alibi 100%! She saw Thornhill sneak into the bell tower at 4:45 PM.`,
+        action: '*Thing dances energetic finger choreo*'
+      };
+    }
+
+    if (input.includes('bianca') || input.includes('barclay') || input.includes('siren')) {
+      return {
+        text: `*Thing cups an imaginary ear* <strong>Bianca Barclay (Siren Prefect):</strong> Ambitious Choral Mistress. Climbed the north parapet during the eclipse to test if her siren song could shatter stone wards. Her 432 Hz silver fork and blue sea-silk scarf prove she sheared the gargoyle in Case 3!`,
+        action: '*Thing hums an acoustic scale*'
+      };
+    }
+
+    if (input.includes('ajax') || input.includes('petropolus') || input.includes('gorgon')) {
+      return {
+        text: `*Thing pulls an imaginary beanie over his fingers* <strong>Ajax Petropolus (Gorgon):</strong> Gentle sculptor. Was in the art studio with wet terracotta clay on his hands. Gorgons turn flesh to stone; they cannot shatter limestone with sound waves. He is innocent!`,
+        action: '*Thing models a lump of clay*'
+      };
+    }
+
+    if (input.includes('weems') || input.includes('larissa') || input.includes('headmistress')) {
+      return {
+        text: `*Thing sits upright in a dignified posture* <strong>Principal Larissa Weems:</strong> Headmistress of Nevermore. She was on a verified telephone conference with Mayor Walker during the eclipse. She is a victim in Case 2 and administratively innocent in Case 3!`,
+        action: '*Thing adjust an imaginary stately brooch*'
+      };
+    }
+
+    if (input.includes('xavier') || input.includes('thorpe') || input.includes('artist')) {
+      return {
+        text: `*Thing paints rapid brushstrokes* <strong>Xavier Thorpe (Psychic Painter):</strong> Brooding artist whose visions can manifest. He sleepwalked into the Crackstone crypt in a deep psychic trance, cut the dahlia with his palette knife, and severed Goody's skull under prophetic compulsion in Case 4!`,
+        action: '*Thing paints in a hypnotic trance*'
+      };
+    }
+
+    if (input.includes('rowan') || input.includes('laslow')) {
+      return {
+        text: `*Thing mimics holding an asthma inhaler* <strong>Rowan Laslow (Telekinetic):</strong> Asthmatic student terrified of prophecies. He was in the tower reading star charts; his shoes had zero cemetery clay and he uses telekinesis, not palette knives. He is innocent!`,
+        action: '*Thing points upwards at the constellations*'
+      };
+    }
+
+    if (input.includes('kinbott') || input.includes('valerie') || input.includes('therapist')) {
+      return {
+        text: `*Thing writes in an imaginary clinical notepad* <strong>Dr. Valerie Kinbott (Therapist):</strong> Academy psychoanalyst. Wore a beige Italian cashmere coat whose threads were caught in the shattered dispensary glass. Her dictaphone recordings prove she was hypnotizing Tyler to control the Hyde in Case 5!`,
+        action: '*Thing takes clinical therapy notes with a gold pen*'
+      };
+    }
+
+    if (input.includes('tyler') || input.includes('galpin')) {
+      if (input.includes('sheriff') || input.includes('donovan')) {
+        return {
+          text: `*Thing flashes a tin deputy star* <strong>Sheriff Donovan Galpin:</strong> Jericho town sheriff. Was at the police precinct desk filing patrol logs during the crypt break-in. He has zero interest in outcast occult relics and is innocent!`,
+          action: '*Thing adjusts a police badge*'
+        };
+      }
+      return {
+        text: `*Thing scuttles with trembling fingers* <strong>Tyler Galpin (Barista):</strong> The troubled town barista. He is the physical vessel of the Hyde, but was under Dr. Kinbott's hypnotic conditioning and neuro-chemical triggers without conscious memory!`,
+        action: '*Thing clutches his head in tragic confusion*'
+      };
+    }
+
+    if (input.includes('walker') || input.includes('mayor')) {
+      return {
+        text: `*Thing gives an overly polished mayoral wave* <strong>Mayor Noble Walker:</strong> Mayor of Jericho and owner of Pilgrim World. Was at a town council budget meeting until midnight. He is in political denial trying to dismiss monsters as bear attacks, but didn't steal the chemicals!`,
+        action: '*Thing shakes imaginary voter hands*'
+      };
+    }
+
+    // 8. General Case Guidance & Progress
+    const clueNames = Object.values(CASE_DATA.clues).map(c => `<em>${c.name}</em>`).join(', ');
     return {
-      text: `*scuttles attentively* Regarding ${CASE_DATA.title}: You have secured ${gameState.cluesCollectedCount}/3 clues. Connect the forensic dots on the Pinboard and confront the suspects!`,
-      action: '*Thing gestures towards the Evidence Dossier and Suspect Chamber*'
+      text: `*Thing scuttles attentively across the dossier of <strong>${CASE_DATA.title}</strong>*<br><br>` +
+            `📊 <strong>Your Progress:</strong> You have discovered <strong>${gameState.cluesCollectedCount}/3</strong> forensic clues for this case.<br>` +
+            `🔍 <strong>Target Clues:</strong> ${clueNames}<br><br>` +
+            `<em>Ask me about any specific clue (e.g. footprint, letter, register, chalice, glove, tuning fork, dahlia, claw, sedative, tape), any suspect, or where to find items in 3D!</em>`,
+      action: '*Thing taps four fingers attentively, waiting for your inquiry*'
     };
   }
 
