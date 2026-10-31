@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgVignette" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#161224"/>
+      <stop offset="60%" stop-color="#0a0812"/>
+      <stop offset="100%" stop-color="#040307"/>
+    </radialGradient>
+    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5c07b"/>
+      <stop offset="50%" stop-color="#b4975a"/>
+      <stop offset="100%" stop-color="#6b5328"/>
+    </linearGradient>
+    <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <filter id="dropGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8b5cf6" flood-opacity="0.4"/>
+    </filter>
+    <filter id="heavyGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(139,92,246,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="600" height="600" fill="url(#bgVignette)"/>
+  <rect width="600" height="600" fill="url(#grid)"/>
+
+  <!-- Forensic Border -->
+  <rect x="18" y="18" width="564" height="564" fill="none" stroke="#2e1065" stroke-width="2" rx="4"/>
+  <rect x="24" y="24" width="552" height="552" fill="none" stroke="rgba(196,181,253,0.2)" stroke-width="1" stroke-dasharray="8 4"/>
+
+  <!-- Corner Ornaments -->
+  <path d="M 28 48 L 48 48 L 48 28" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <path d="M 572 48 L 552 48 L 552 28" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <path d="M 28 552 L 48 552 L 48 572" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <path d="M 572 552 L 552 552 L 552 572" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+
+  <!-- Top Forensic Header -->
+  <g transform="translate(36, 44)">
+    <rect x="0" y="0" width="140" height="20" fill="rgba(76,29,149,0.5)" rx="3" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="70" y="14" fill="#ddd6fe" font-family="'Courier New', monospace" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">FORENSIC UNIT</text>
+    <text x="150" y="15" fill="#a78bfa" font-family="'Cinzel', serif" font-size="12" font-weight="bold" letter-spacing="1.5">NEVERMORE CRIME ARCHIVE // CASE #002</text>
+    <text x="528" y="14" fill="#ef4444" font-family="'Courier New', monospace" font-size="11" font-weight="bold" text-anchor="end">ITEM A-03</text>
+  </g>
+
+  <!-- Title Banner -->
+  <text x="300" y="86" fill="#f5f3ff" font-family="'Cinzel', Georgia, serif" font-size="17" font-weight="bold" text-anchor="middle" letter-spacing="2" filter="url(#dropGlow)">SOIL-STAINED HORTICULTURAL GLOVE</text>
+  <line x1="80" y1="98" x2="520" y2="98" stroke="rgba(139,92,246,0.3)" stroke-width="1"/>
+
+  <!-- Specific Clue Graphics -->
+  <!-- Glove Illustration -->
+    <g transform="translate(300, 310)">
+      <!-- Glove Shape -->
+      <g transform="rotate(-15) translate(-70, -130)">
+        <!-- Cuff -->
+        <rect x="25" y="220" width="95" height="45" rx="6" fill="#1b3826" stroke="#22c55e" stroke-width="1.5"/>
+        <line x1="30" y1="242" x2="115" y2="242" stroke="url(#goldGlow)" stroke-width="2"/>
+        <!-- Palm & Fingers -->
+        <path d="M 30 220 C 20 180 20 130 25 100 
+                 L 25 50 C 25 35 42 35 42 50 L 45 100 
+                 L 48 25 C 48 10 65 10 65 25 L 68 100 
+                 L 72 35 C 72 20 89 20 89 35 L 89 105 
+                 L 92 65 C 92 50 108 50 108 65 L 105 130 
+                 C 125 145 135 170 115 195 L 115 220 Z" 
+              fill="#14281b" stroke="#15803d" stroke-width="2"/>
+        
+        <!-- Thumb -->
+        <path d="M 30 150 C 5 140 0 165 18 185 L 30 190 Z" fill="#162e1f" stroke="#15803d" stroke-width="1.5"/>
+
+        <!-- Purple Carnivorous Sap Stains -->
+        <path d="M 40 80 Q 55 120 70 90 Q 60 140 50 130 Z" fill="#a855f7" opacity="0.85" filter="url(#dropGlow)"/>
+        <circle cx="35" cy="55" r="6" fill="#9333ea" filter="url(#dropGlow)"/>
+        <circle cx="56" cy="40" r="7" fill="#7e22ce" filter="url(#dropGlow)"/>
+        <path d="M 68 110 Q 75 160 55 180" fill="none" stroke="#c084fc" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Soil Residue -->
+        <circle cx="45" cy="170" r="4" fill="#3b2b1a"/>
+        <circle cx="85" cy="180" r="5" fill="#2d2114"/>
+        <circle cx="70" cy="195" r="3.5" fill="#3b2b1a"/>
+      </g>
+
+      <!-- Attached Forensic String Tag -->
+      <g transform="translate(45, 90)">
+        <line x1="-30" y1="-20" x2="0" y2="0" stroke="#f59e0b" stroke-width="1.5"/>
+        <rect x="0" y="0" width="130" height="48" fill="#1a1429" stroke="#f59e0b" stroke-width="1.2" rx="3"/>
+        <text x="65" y="16" fill="#fde68a" font-family="'Courier New', monospace" font-size="8.5" font-weight="bold" text-anchor="middle">FORENSIC TAG #88</text>
+        <text x="65" y="30" fill="#cbd5e1" font-family="'Courier New', monospace" font-size="8" text-anchor="middle">RESIDUE: DROSERA SAP</text>
+        <text x="65" y="42" fill="#ef4444" font-family="'Courier New', monospace" font-size="7.5" text-anchor="middle">RECOVERED: BELL TOWER</text>
+      </g>
+    </g>
+
+  <!-- Bottom Forensic Metric Scale -->
+  <g transform="translate(40, 535)">
+    <rect x="0" y="0" width="520" height="24" fill="rgba(15,12,25,0.8)" stroke="#4c1d95" stroke-width="1" rx="2"/>
+    <!-- Centimeter ticks -->
+    
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="2" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">0cm</text>
+    
+      <line x1="20" y1="0" x2="20" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="40" y1="0" x2="40" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="60" y1="0" x2="60" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="80" y1="0" x2="80" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="100" y1="0" x2="100" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="102" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">5cm</text>
+    
+      <line x1="120" y1="0" x2="120" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="140" y1="0" x2="140" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="160" y1="0" x2="160" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="180" y1="0" x2="180" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="200" y1="0" x2="200" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="202" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">10cm</text>
+    
+      <line x1="220" y1="0" x2="220" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="240" y1="0" x2="240" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="260" y1="0" x2="260" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="280" y1="0" x2="280" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="300" y1="0" x2="300" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="302" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">15cm</text>
+    
+      <line x1="320" y1="0" x2="320" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="340" y1="0" x2="340" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="360" y1="0" x2="360" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="380" y1="0" x2="380" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="400" y1="0" x2="400" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="402" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">20cm</text>
+    
+      <line x1="420" y1="0" x2="420" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="440" y1="0" x2="440" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="460" y1="0" x2="460" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="480" y1="0" x2="480" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+      <line x1="500" y1="0" x2="500" y2="14" stroke="#c4b5fd" stroke-width="1.5"/>
+      <text x="502" y="20" fill="#a78bfa" font-family="'Courier New', monospace" font-size="8">25cm</text>
+    
+      <line x1="520" y1="0" x2="520" y2="7" stroke="#c4b5fd" stroke-width="0.8"/>
+      
+    
+    <text x="510" y="16" fill="#f59e0b" font-family="'Courier New', monospace" font-size="9" text-anchor="end">CONFIDENTIAL EVIDENCE</text>
+  </g>
+</svg>

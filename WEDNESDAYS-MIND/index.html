@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wednesday's Mind - AI Mystery Intelligence System. Think Like Wednesday. Uncover What Others Cannot in this interactive 3D gothic detective experience.">
+  <meta name="keywords" content="Wednesday Addams, 3D Mystery, Three.js, Detective Game, Nevermore Academy, Gothic Mystery, Halloween Hackathon">
+  <title>Wednesday's Mind | AI Mystery Intelligence System</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Loading Screen -->
+  <div id="custom-loading-screen">
+    <div class="loader-crest">
+      <span style="font-size: 1.8rem;">🦇</span>
+    </div>
+    <div class="loader-text">WEDNESDAY'S MIND</div>
+    <div class="loader-subtext">ENTERING NEVERMORE ARCHIVES • INITIALIZING 3D SENSORY ENGINE...</div>
+  </div>
+
+  <!-- Victory Particle Canvas (Bats & Embers) -->
+  <canvas id="victory-particles-canvas" class="particle-canvas"></canvas>
+
+  <!-- Ambient Fog Canvas -->
+  <canvas id="ambient-fog"></canvas>
+
+  <!-- Main Application Wrapper -->
+  <div class="app-container">
+
+    <!-- ====================================================================
+         NAVIGATION BAR
+         ==================================================================== -->
+    <header class="main-nav">
+      <div class="nav-brand" onclick="window.WEDNESDAY_APP.switchView('landing')">
+        <div class="brand-crest">
+          <span>W</span>
+        </div>
+        <div class="brand-text">
+          <h1>WEDNESDAY'S MIND</h1>
+          <span>AI MYSTERY INTELLIGENCE</span>
+        </div>
+      </div>
+
+      <!-- Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li class="nav-item">
+          <button class="nav-btn active" data-view="landing" id="nav-btn-landing">
+            <span>🏰</span> Home
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" data-view="room" id="nav-btn-room">
+            <span>🕯️</span> 3D Library
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" data-view="evidence" id="nav-btn-evidence">
+            <span>📜</span> Evidence <span class="badge" id="nav-clue-badge">0/3</span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" data-view="suspects" id="nav-btn-suspects">
+            <span>👁️</span> Suspects
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" data-view="assistant" id="nav-btn-assistant">
+            <span>✋</span> Thing's AI
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-btn" data-view="verdict" id="nav-btn-verdict">
+            <span>⚖️</span> Final Verdict
+          </button>
+        </li>
+      </ul>
+
+      <!-- HUD Stats & Controls -->
+      <div class="nav-actions">
+        <div class="hud-stat clues-stat" title="Forensic Clues Collected">
+          <span>🔍</span>
+          <span id="hud-clues-count">0/3</span>
+        </div>
+        <div class="hud-stat score-stat" title="Detective Score">
+          <span>⭐</span>
+          <span id="hud-score-count">100</span>
+        </div>
+        <button class="icon-btn" id="btn-jumpscare-trigger" title="⚠️ Summon The Shadows (Jumpscare Demo)">
+          <span>👻</span>
+        </button>
+        <button class="icon-btn" id="btn-sound-toggle" title="Toggle Gothic Audio Atmosphere">
+          <span>🔊</span>
+        </button>
+        <button class="icon-btn" id="btn-nav-restart" title="Restart Investigation">
+          <span>🔄</span>
+        </button>
+        <button class="mobile-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <span>☰</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Glowing Gothic Scroll Progress Indicator -->
+    <div class="scroll-progress-container">
+      <div class="scroll-progress-bar" id="scroll-progress-bar">
+        <span class="scroll-progress-bat">🦇</span>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         MAIN CONTENT ROUTER
+         ==================================================================== -->
+    <main>
+
+      <!-- ================================================================
+           VIEW 1: LANDING PAGE
+           ================================================================ -->
+      <!-- ================================================================
+           VIEW 1: LANDING PAGE & MASTER ARCHIVAL INDEX (Deeply Scrollable)
+           ================================================================ -->
+      <section class="view-section active" id="view-landing">
+        <div class="landing-backdrop parallax-layer" data-speed="0.18"></div>
+        <div class="landing-vignette"></div>
+        <div class="landing-moon parallax-layer" data-speed="0.4"></div>
+
+        <!-- Glowing Watching Eyes in the Shadows -->
+        <div class="spooky-eyes active parallax-layer" data-speed="-0.15" id="spooky-eyes-1" style="top: 22%; left: 10%;">
+          <div class="spooky-eye"></div>
+          <div class="spooky-eye"></div>
+        </div>
+        <div class="spooky-eyes active parallax-layer" data-speed="-0.2" id="spooky-eyes-2" style="top: 38%; right: 12%;">
+          <div class="spooky-eye"></div>
+          <div class="spooky-eye"></div>
+        </div>
+        <div class="spooky-eyes active parallax-layer" data-speed="-0.1" id="spooky-eyes-3" style="top: 68%; left: 16%;">
+          <div class="spooky-eye"></div>
+          <div class="spooky-eye"></div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             HERO SECTION (Cinematic Entry)
+             ------------------------------------------------------------ -->
+        <div class="landing-hero-block" id="landing-hero">
+          <div class="landing-content">
+            <div class="landing-badge reveal-on-scroll">
+              <span>🦇</span> Nevermore Academy Crime Files • 5 Solvable Mysteries
+            </div>
+            <h1 class="landing-title parallax-text reveal-on-scroll delay-1">WEDNESDAY'S MIND</h1>
+            <div class="landing-subtitle parallax-text reveal-on-scroll delay-2">AI MYSTERY INTELLIGENCE SYSTEM</div>
+            <p class="landing-tagline reveal-on-scroll delay-2">"Think Like Wednesday. Uncover What Others Cannot."</p>
+
+            <!-- 5-Case Selector Hub Pills -->
+            <div class="case-selector-bar reveal-on-scroll delay-2" style="justify-content: center; margin: 0.5rem 0;" id="landing-case-pills">
+              <div class="case-pill active" data-case="CASE_001"><span>CASE 001: Midnight Disappearance</span> <span class="case-status-badge">ACTIVE</span></div>
+              <div class="case-pill" data-case="CASE_002"><span>CASE 002: Bell Tower Poisoning</span> <span class="case-status-badge">UNSOLVED</span></div>
+              <div class="case-pill" data-case="CASE_003"><span>CASE 003: Gargoyle's Curse</span> <span class="case-status-badge">UNSOLVED</span></div>
+              <div class="case-pill" data-case="CASE_004"><span>CASE 004: Phantom of the Crypt</span> <span class="case-status-badge">UNSOLVED</span></div>
+              <div class="case-pill" data-case="CASE_005"><span>CASE 005: Hyde's Awakening</span> <span class="case-status-badge">UNSOLVED</span></div>
+            </div>
+
+            <p class="landing-desc reveal-on-scroll delay-3" id="landing-case-desc">
+              At exactly midnight, Nevermore's forbidden <em>Codex Nocturna</em> vanished from the restricted archives. Three suspects were present. Each tells a different story. Wednesday suspects someone is concealing the dark truth. Your intelligence is your greatest weapon.
+            </p>
+
+            <div class="landing-buttons reveal-on-scroll delay-3">
+              <button class="btn-primary" id="btn-start-investigation" onclick="window.WEDNESDAY_APP.switchView('room')">
+                <span>🕯️</span> Enter 3D Void Investigation
+              </button>
+              <button class="btn-secondary" id="btn-explore-index" onclick="window.WEDNESDAY_APP.scrollToIndex()">
+                <span>🗂️</span> Master Archival Index
+              </button>
+              <button class="btn-secondary" id="btn-how-to-play" onclick="window.WEDNESDAY_APP.scrollToCases()">
+                <span>📖</span> 5 Case Dossiers
+              </button>
+            </div>
+
+            <button class="spooky-trigger-btn reveal-on-scroll delay-4" id="btn-summon-shadows" title="Click at your own risk...">
+              <span>🕯️</span> <span>⚠️ DO NOT DISTURB THE BLACK CANDLE (JUMPSCARE)</span>
+            </button>
+
+            <div class="landing-ticker reveal-on-scroll delay-4">
+              <span class="quote-speaker">WEDNESDAY:</span>
+              <span id="ticker-quote">"I find ordinary life to be a soul-sucking void of meaningless affirmation. Now, a midnight heist of forbidden shadow grimoires? That's poetry."</span>
+            </div>
+
+            <!-- Animated Scroll Down Indicator (FIXED: Smooth scrolls to Master Index) -->
+            <div class="scroll-indicator-container" id="landing-scroll-indicator" onclick="window.WEDNESDAY_APP.scrollDownToOverview()">
+              <div class="scroll-mouse-icon">
+                <div class="scroll-mouse-wheel"></div>
+              </div>
+              <span class="scroll-indicator-text">Scroll to Investigate</span>
+              <span class="scroll-indicator-arrow">▼</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------
+             SECTION 2: MASTER ARCHIVAL INDEX (The User's Requested Main Index Hub)
+             ------------------------------------------------------------ -->
+        <section class="landing-section-block" id="landing-master-index">
+          <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+              <div class="section-tag">INDEX RERUM DAMNATORUM</div>
+              <h2 class="section-title parallax-text">THE NEVERMORE ARCHIVAL DIRECTORY</h2>
+              <p class="section-desc">Select a crime chamber or forensic department below to navigate directly into the investigation. Proceed at your own peril.</p>
+            </div>
+
+            <div class="master-index-grid">
+              <!-- Card 1: 3D Void Library -->
+              <div class="index-card reveal-on-scroll" onclick="window.WEDNESDAY_APP.switchView('room')">
+                <div class="index-card-icon">🕯️</div>
+                <div class="index-card-badge">INTERACTIVE 3D</div>
+                <h3 class="index-card-title">The 3D Void Library & Ancient Door</h3>
+                <p class="index-card-desc">Step into the wall-less cosmic void. Anti-gravity books drift through space around the freestanding ancient gothic door. Inspect floating forensic clues in real-time 3D orbit.</p>
+                <div class="index-card-meta">
+                  <span>🌌 Cosmic Void</span>
+                  <span>🚪 Freestanding Door</span>
+                  <span>📚 Floating Relics</span>
+                </div>
+                <button class="index-card-btn"><span>Enter 3D Void</span> →</button>
+              </div>
+
+              <!-- Card 2: 5 Nevermore Cases -->
+              <div class="index-card reveal-on-scroll delay-1" onclick="window.WEDNESDAY_APP.scrollToCases()">
+                <div class="index-card-icon">📁</div>
+                <div class="index-card-badge">5 SOLVABLE FILES</div>
+                <h3 class="index-card-title">Nevermore Crime Dossiers (Cases 1-5)</h3>
+                <p class="index-card-desc">Five distinct mysteries spanning the Restricted Archives, North Bell Tower, Belfry Parapet, Crackstone Crypt, and Medical Dispensary. Each has 3 unique physical clues and suspect alibis.</p>
+                <div class="index-card-meta">
+                  <span>⚡ 5 Storylines</span>
+                  <span>🔍 15 Forensic Clues</span>
+                  <span>⚖️ 5 Culprits</span>
+                </div>
+                <button class="index-card-btn"><span>Browse 5 Cases</span> →</button>
+              </div>
+
+              <!-- Card 3: Evidence Dossier & Pinboard -->
+              <div class="index-card reveal-on-scroll delay-2" onclick="window.WEDNESDAY_APP.switchView('evidence')">
+                <div class="index-card-icon">📜</div>
+                <div class="index-card-badge">FORENSIC DOSSIER</div>
+                <h3 class="index-card-title">Evidence Notebook & String Pinboard</h3>
+                <p class="index-card-desc">Review high-resolution microscopic photographs, toxic chemical profiles, and acoustic frequency analyses. Connect forensic clues to suspects on the classic detective corkboard.</p>
+                <div class="index-card-meta">
+                  <span>📌 String Board</span>
+                  <span>🔬 Chemical Lab</span>
+                  <span>🔎 Macro Zoom</span>
+                </div>
+                <button class="index-card-btn"><span>Open Evidence</span> →</button>
+              </div>
+
+              <!-- Card 4: Interrogation Chamber -->
+              <div class="index-card reveal-on-scroll delay-3" onclick="window.WEDNESDAY_APP.switchView('suspects')">
+                <div class="index-card-icon">👁️</div>
+                <div class="index-card-badge">SUSPECT PROFILES</div>
+                <h3 class="index-card-title">Interrogation Chamber & Alibis</h3>
+                <p class="index-card-desc">Cross-examine Nevermore faculty and outcasts. Confront Madam Vance, Dr. Graves, Marilyn Thornhill, Bianca Barclay, Xavier Thorpe, and Dr. Kinbott with contradictory forensic proof.</p>
+                <div class="index-card-meta">
+                  <span>🎙️ Interrogations</span>
+                  <span>🧠 Wednesday's Mind</span>
+                  <span>⚠️ Suspicion Gauge</span>
+                </div>
+                <button class="index-card-btn"><span>Interrogate</span> →</button>
+              </div>
+
+              <!-- Card 5: Thing's AI Terminal -->
+              <div class="index-card reveal-on-scroll delay-1" onclick="window.WEDNESDAY_APP.switchView('assistant')">
+                <div class="index-card-icon">✋</div>
+                <div class="index-card-badge">DEDUCTION AI</div>
+                <h3 class="index-card-title">Thing's AI Cryptic Intelligence</h3>
+                <p class="index-card-desc">Wednesday's faithful disembodied hand communicates through cryptic tapping, Morse code, and surgical forensic analysis. Ask for hint consultations, suspect motives, and cipher translations.</p>
+                <div class="index-card-meta">
+                  <span>📡 Morse Synth</span>
+                  <span>💡 Clue Hinting</span>
+                  <span>🖤 Addams Lore</span>
+                </div>
+                <button class="index-card-btn"><span>Consult Thing</span> →</button>
+              </div>
+
+              <!-- Card 6: The Tribunal of Shadows -->
+              <div class="index-card reveal-on-scroll delay-2" onclick="window.WEDNESDAY_APP.switchView('verdict')">
+                <div class="index-card-icon">⚖️</div>
+                <div class="index-card-badge">FINAL JUDGMENT</div>
+                <h3 class="index-card-title">The High Inquisitor's Tribunal</h3>
+                <p class="index-card-desc">Ready to solve the mystery? Deliver your formal accusation. Identify the true culprit, determine their criminal motive, cite decisive physical evidence, and face Wednesday's cold evaluation.</p>
+                <div class="index-card-meta">
+                  <span>🏆 Score System</span>
+                  <span>📜 Arrest Warrant</span>
+                  <span>🦇 Bat Swarm</span>
+                </div>
+                <button class="index-card-btn"><span>Deliver Verdict</span> →</button>
+              </div>
+
+              <!-- Card 7: Crypt of Horrors & Audio Synth -->
+              <div class="index-card reveal-on-scroll delay-3" onclick="window.WEDNESDAY_APP.scrollToCrypt()">
+                <div class="index-card-icon">⚡</div>
+                <div class="index-card-badge">SPOOKY LAB</div>
+                <h3 class="index-card-title">Crypt of Shadows & Jumpscare Lab</h3>
+                <p class="index-card-desc">Summon terrifying specters, test lightning strikes, trigger thunderclaps, and listen to the real-time Web Audio API procedural FM synthesis engine and organ chords.</p>
+                <div class="index-card-meta">
+                  <span>👻 Screech Synth</span>
+                  <span>⛈️ Thunderstorm</span>
+                  <span>🎹 Pipe Organ</span>
+                </div>
+                <button class="index-card-btn"><span>Enter Crypt</span> →</button>
+              </div>
+
+              <!-- Card 8: Raven Rules of Deduction -->
+              <div class="index-card reveal-on-scroll delay-4" onclick="window.WEDNESDAY_APP.scrollToRules()">
+                <div class="index-card-icon">📖</div>
+                <div class="index-card-badge">METHODOLOGY</div>
+                <h3 class="index-card-title">Wednesday's Forensic Methodology</h3>
+                <p class="index-card-desc">Study the raven rules of forensic deduction: eliminate emotional noise, dissect physical contradictions, and remember that everybody lies—except soil chemistry and acoustic cleavage.</p>
+                <div class="index-card-meta">
+                  <span>🦅 Raven Logic</span>
+                  <span>🧪 Empirical Truth</span>
+                  <span>❌ Zero Mercy</span>
+                </div>
+                <button class="index-card-btn"><span>Read Rules</span> →</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             SECTION 3: 5 SOLVABLE CASE DOSSIERS SHOWCASE
+             ------------------------------------------------------------ -->
+        <section class="landing-section-block" id="landing-case-showcase">
+          <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+              <div class="section-tag">NEVERMORE CRIME REGISTER</div>
+              <h2 class="section-title parallax-text">THE 5 NEVERMORE CASE FILES</h2>
+              <p class="section-desc">Each case features unique 3D floating evidence items, specialized suspect interrogation trees, and distinct forensic contradictions.</p>
+            </div>
+
+            <div class="cases-showcase-grid" id="cases-showcase-container">
+              <!-- Dynamically populated by renderCasesShowcase() in main.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             SECTION 4: FORENSIC METHODOLOGY & RULES
+             ------------------------------------------------------------ -->
+        <section class="landing-section-block" id="landing-rules-methodology">
+          <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+              <div class="section-tag">RAVEN TENETS</div>
+              <h2 class="section-title parallax-text">RULES OF GOTHIC FORENSIC DEDUCTION</h2>
+              <p class="section-desc">"To solve a crime, one must become more ruthless than the perpetrator." — Wednesday Addams</p>
+            </div>
+
+            <div class="rules-cards-grid">
+              <div class="rule-card reveal-on-scroll">
+                <div class="rule-num">01</div>
+                <h3>Orbit the 3D Void Space</h3>
+                <p>Never rely on flat surface impressions. Rotate the 3D camera across the cosmic void to inspect floating grimoires, discover glowing purple beacon relics suspended in zero-gravity, and analyze microscopic tags.</p>
+              </div>
+              <div class="rule-card reveal-on-scroll delay-1">
+                <div class="rule-num">02</div>
+                <h3>Physical Evidence Trumps Alibis</h3>
+                <p>Suspects fabricate charming excuses. But nightshade chemical halos, Drosera carnivorous sap, 432 Hz acoustic stone fractures, and Italian cashmere threads in shattered glass do not lie.</p>
+              </div>
+              <div class="rule-card reveal-on-scroll delay-2">
+                <div class="rule-num">03</div>
+                <h3>Cross-Examine & Confront</h3>
+                <p>Question every suspect in the interrogation chamber. When their testimony contradicts physical proof, deploy the evidence confrontation options to fracture their composure and expose their deceit.</p>
+              </div>
+              <div class="rule-card reveal-on-scroll delay-3">
+                <div class="rule-num">04</div>
+                <h3>The Weight of False Accusation</h3>
+                <p>Accusing the wrong suspect without the decisive evidence will result in severe score deduction and public humiliation in Principal Weems' tribunal. Make certain your logic is infallible.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             SECTION 5: THE CRYPT OF SHADOWS & OCCULT AUDIO LAB
+             ------------------------------------------------------------ -->
+        <section class="landing-section-block" id="landing-spooky-crypt">
+          <div class="section-container">
+            <div class="section-header reveal-on-scroll">
+              <div class="section-tag">DARK ACOUSTICS</div>
+              <h2 class="section-title parallax-text">CRYPT OF SHADOWS & AUDIO LAB</h2>
+              <p class="section-desc">Experience the occult atmosphere of Nevermore. Trigger sudden jumpscares, summon violent thunderclaps, and control the Web Audio API synthesis engine.</p>
+            </div>
+
+            <div class="spooky-controls-panel reveal-on-scroll">
+              <div class="spooky-actions-grid">
+                <button class="spooky-action-card danger" onclick="window.WEDNESDAY_APP.triggerJumpscare()">
+                  <div class="action-icon">👻</div>
+                  <h4>Summon The Dark Specter</h4>
+                  <p>Triggers blood-red strobe screen shake, FM-synthesized shriek, and terrifying specter manifestation.</p>
+                  <span class="action-pill danger-pill">⚠️ Violent Jumpscare</span>
+                </button>
+
+                <button class="spooky-action-card" onclick="window.WEDNESDAY_APP.triggerLightning()">
+                  <div class="action-icon">⚡</div>
+                  <h4>Summon Lightning Storm</h4>
+                  <p>Triggers dual blinding strobe lightning flashes across the window with synthesized low-frequency thunder rumble.</p>
+                  <span class="action-pill">⛈️ Weather Event</span>
+                </button>
+
+                <button class="spooky-action-card" onclick="window.WEDNESDAY_APP.playOrganChord()">
+                  <div class="action-icon">🎹</div>
+                  <h4>Resonate Pipe Organ</h4>
+                  <p>Plays an ominous cathedral D-minor organ chord synthesized via harmonic multi-sine oscillators.</p>
+                  <span class="action-pill">🎶 Gothic Harmony</span>
+                </button>
+
+                <button class="spooky-action-card" onclick="window.WEDNESDAY_APP.toggleDrone()">
+                  <div class="action-icon">🔊</div>
+                  <h4>Toggle Ambient Void Drone</h4>
+                  <p>Activates or silences the subterranean binaural D2/A2 background drone with low-pass resonance filter.</p>
+                  <span class="action-pill" id="crypt-drone-status">🔉 Drone Active</span>
+                </button>
+              </div>
+
+              <div class="spooky-quote-banner reveal-on-scroll delay-2">
+                <span class="quote-bat">🦇</span>
+                <p id="crypt-random-quote">"Those who do not look into the darkness will forever remain blinded by the light." — Wednesday</p>
+                <button class="quote-refresh-btn" onclick="window.WEDNESDAY_APP.cycleGothicQuote()">Next Quote ↻</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ================================================================
+           VIEW 2: INTERACTIVE 3D MYSTERY ROOM (Three.js)
+           ================================================================ -->
+      <section class="view-section" id="view-room">
+        <!-- Three.js Canvas Container -->
+        <div id="three-canvas-container"></div>
+
+        <!-- 3D Room HUD Header -->
+        <div class="room-hud">
+          <div class="room-title-card">
+            <div class="case-stamp">CASE 001 // CRIME SCENE</div>
+            <h2>The Restricted Archive</h2>
+            <p>Inspect the library in 3D. Click the glowing purple beacons to analyze forensic clues.</p>
+          </div>
+
+          <div class="room-controls-card">
+            <div class="camera-preset-bar">
+              <button class="preset-btn active" id="preset-overview">🌌 Void Overview</button>
+              <button class="preset-btn" id="preset-door">🚪 Ancient Door</button>
+              <button class="preset-btn" id="preset-clues">✨ Floating Relics</button>
+            </div>
+            <div class="room-instructions">
+              <span>🖱️ Drag:</span> Orbit • <span>Scroll:</span> Zoom • <span>Click:</span> Inspect Clue
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Clue Raycast Hover Tooltip -->
+        <div id="clue-hover-tooltip"></div>
+
+        <!-- Bottom Clue Tracker Bar -->
+        <div class="room-bottom-tracker">
+          <span class="tracker-label">ARCHIVE CLUES:</span>
+          <div class="tracker-clue-dots">
+            <div class="clue-dot-item" id="dot-footprint" onclick="window.WEDNESDAY_APP.inspectClue('footprint')">
+              <div class="dot-indicator"></div>
+              <span>Muddy Footprint</span>
+            </div>
+            <div class="clue-dot-item" id="dot-letter" onclick="window.WEDNESDAY_APP.inspectClue('letter')">
+              <div class="dot-indicator"></div>
+              <span>Torn Letter</span>
+            </div>
+            <div class="clue-dot-item" id="dot-register" onclick="window.WEDNESDAY_APP.inspectClue('register')">
+              <div class="dot-indicator"></div>
+              <span>Altered Register</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW 3: EVIDENCE NOTEBOOK & CONSPIRACY PINBOARD
+           ================================================================ -->
+      <section class="view-section" id="view-evidence">
+        <div class="section-header">
+          <div class="section-tag">DETECTIVE DOSSIER</div>
+          <h2 class="section-title">EVIDENCE & CONSPIRACY BOARD</h2>
+          <p class="section-desc">Review your collected physical evidence, correlate forensic properties, and connect clues with suspects on the string pinboard.</p>
+        </div>
+
+        <!-- Evidence View Tabs -->
+        <div class="evidence-tab-bar">
+          <button class="evidence-tab-btn active" id="tab-btn-clues">
+            <span>📜</span> Forensic Clues Dossier
+          </button>
+          <button class="evidence-tab-btn" id="tab-btn-pinboard">
+            <span>📌</span> Detective String Pinboard
+          </button>
+        </div>
+
+        <!-- Tab 1: Clue Cards Grid -->
+        <div id="evidence-tab-clues">
+          <div class="clues-grid" id="clues-cards-grid">
+            <!-- Dynamically populated by main.js -->
+          </div>
+
+          <!-- User Notes Pad -->
+          <div class="notes-pad-container">
+            <div class="notes-header">
+              <h3><span>📓</span> Detective Investigation Log & Personal Notes</h3>
+              <span class="notes-status">● Auto-Saved To LocalStorage</span>
+            </div>
+            <textarea id="user-notes-textarea" class="notes-textarea" placeholder="Type your hypotheses, timelines, and deductions here. Wednesday will keep them recorded..."></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 2: Conspiracy Pinboard / String Connector -->
+        <div id="evidence-tab-pinboard" style="display: none;">
+          <div class="pinboard-container">
+            <div class="pinboard-header">
+              <h3><span>🧶</span> The Conspiracy Pinboard: Hypotheses & Contradictions</h3>
+              <p>Click a <strong>Clue</strong> on the left, then click a <strong>Suspect</strong> on the right to test your forensic connection.</p>
+            </div>
+
+            <!-- SVG connection canvas -->
+            <svg class="pinboard-svg-canvas" id="pinboard-svg"></svg>
+
+            <div class="pinboard-columns">
+              <!-- Clues Column -->
+              <div class="pinboard-col">
+                <div class="pinboard-col-title">
+                  <span>🔍</span> Forensic Clues
+                </div>
+                <div class="pinboard-items-list" id="pinboard-clues-list"></div>
+              </div>
+
+              <!-- Suspects Column -->
+              <div class="pinboard-col">
+                <div class="pinboard-col-title">
+                  <span>👥</span> Nevermore Suspects
+                </div>
+                <div class="pinboard-items-list" id="pinboard-suspects-list"></div>
+              </div>
+            </div>
+
+            <!-- Connection Deduction Log -->
+            <div class="pinboard-connections-log">
+              <div class="log-title">FORENSIC DEDUCTION LOG:</div>
+              <div class="connections-list" id="pinboard-connections-log-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW 4: SUSPECT INTERROGATION SYSTEM
+           ================================================================ -->
+      <section class="view-section" id="view-suspects">
+        <div class="section-header">
+          <div class="section-tag">INQUISITION CHAMBER</div>
+          <h2 class="section-title">SUSPECT INTERROGATIONS</h2>
+          <p class="section-desc">Interrogate the three persons of interest present at Nevermore during the midnight disappearance. Confront them with collected physical clues.</p>
+        </div>
+
+        <div class="suspects-wrapper">
+          <!-- Left Nav Cards -->
+          <div class="suspects-nav-list">
+            <!-- Librarian Card -->
+            <div class="suspect-nav-card active" data-suspect="librarian">
+              <img src="assets/images/suspect_librarian.jpg" alt="Madam Vance" class="nav-card-portrait">
+              <div class="nav-card-info">
+                <h4>Madam Thalia Vance</h4>
+                <span class="suspect-role">Chief Archivist</span>
+                <div class="nav-card-suspicion">
+                  <div class="suspicion-bar-mini">
+                    <div class="suspicion-fill-mini" style="width: 40%;"></div>
+                  </div>
+                  <span class="suspicion-percent-mini">40%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Card -->
+            <div class="suspect-nav-card" data-suspect="student">
+              <img src="assets/images/suspect_student.jpg" alt="Julian Crane" class="nav-card-portrait">
+              <div class="nav-card-info">
+                <h4>Julian Crane</h4>
+                <span class="suspect-role">Nocturnal Student</span>
+                <div class="nav-card-suspicion">
+                  <div class="suspicion-bar-mini">
+                    <div class="suspicion-fill-mini" style="width: 65%;"></div>
+                  </div>
+                  <span class="suspicion-percent-mini">65%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Professor Card -->
+            <div class="suspect-nav-card" data-suspect="professor">
+              <img src="assets/images/suspect_professor.jpg" alt="Dr. Arthur Graves" class="nav-card-portrait">
+              <div class="nav-card-info">
+                <h4>Dr. Arthur Graves</h4>
+                <span class="suspect-role">Professor of Alchemy</span>
+                <div class="nav-card-suspicion">
+                  <div class="suspicion-bar-mini">
+                    <div class="suspicion-fill-mini" style="width: 45%;"></div>
+                  </div>
+                  <span class="suspicion-percent-mini">45%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Interrogation Chamber Panel -->
+          <div class="interrogation-chamber">
+            <div class="dossier-hero">
+              <div class="dossier-portrait-frame">
+                <img id="dossier-portrait" src="assets/images/suspect_librarian.jpg" alt="Suspect" class="dossier-portrait-img">
+                <div class="dossier-badge">PERSON OF INTEREST</div>
+              </div>
+
+              <div class="dossier-details">
+                <div class="dossier-header-title">
+                  <div>
+                    <h3 class="dossier-name" id="dossier-name">Madam Thalia Vance</h3>
+                    <div class="dossier-title-role" id="dossier-role">Chief Archivist & Head Librarian • Age 54</div>
+                  </div>
+                </div>
+
+                <div class="suspicion-gauge-container">
+                  <div class="gauge-header">
+                    <span class="gauge-label">PSYCHOLOGICAL SUSPICION LEVEL</span>
+                    <span class="gauge-value" id="suspicion-gauge-val">40%</span>
+                  </div>
+                  <div class="gauge-bar">
+                    <div class="gauge-fill" id="suspicion-gauge-fill" style="width: 40%;"></div>
+                  </div>
+                </div>
+
+                <p class="dossier-bio" id="dossier-bio">Strict, protective guardian of Nevermore Academy’s oldest manuscripts.</p>
+                <div class="dossier-alibi-box">
+                  <strong>Stated Alibi:</strong>
+                  <span id="dossier-alibi">Locked the heavy iron doors at 11:45 PM sharp.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interrogation Console -->
+            <div class="interrogation-console">
+              <div class="questions-section">
+                <h4><span>⚖️</span> Select Inquiry or Confrontation:</h4>
+                <div class="questions-list" id="interrogation-questions-list">
+                  <!-- Dynamically rendered by main.js -->
+                </div>
+              </div>
+
+              <!-- Dialogue Transcript Box -->
+              <div class="dialogue-transcript-box">
+                <div class="transcript-header">
+                  <span>TRANSCRIPT LOG // CASE 001</span>
+                  <span>RECORDED BY THING</span>
+                </div>
+                <div class="transcript-body" id="interrogation-transcript-body">
+                  <div class="statement-bubble" style="border-left: 3px solid var(--accent-gold);">
+                    <div class="bubble-speaker"><span>🖤</span> WEDNESDAY ADDAMS</div>
+                    <div class="bubble-text">"Select a question from the left. Every word is either a confession or an insult to my patience."</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW 5: AI DETECTIVE ASSISTANT (THING'S INTELLIGENCE)
+           ================================================================ -->
+      <section class="view-section" id="view-assistant">
+        <div class="section-header">
+          <div class="section-tag">AI COMPANION</div>
+          <h2 class="section-title">THING'S INTELLIGENCE</h2>
+          <p class="section-desc">Wednesday's loyal, sharp-witted companion. Consult Thing for forensic breakdowns, psychological alibi checks, and subtle deductive guidance.</p>
+        </div>
+
+        <div class="assistant-shell">
+          <div class="assistant-header">
+            <div class="assistant-profile">
+              <img src="assets/images/thing_assistant.jpg" alt="Thing" class="thing-avatar">
+              <div class="thing-info">
+                <h3>Thing (Addams Intelligence Engine)</h3>
+                <div class="thing-status">
+                  <div class="status-dot-pulse"></div>
+                  <span>STATUS: READY & OBSERVANT • HACKATHON LOCAL INTELLIGENCE</span>
+                </div>
+              </div>
+            </div>
+            <button class="assistant-config-btn" title="Thing AI Model Settings" onclick="alert('Thing is running on an optimized local deductive engine with contextual memory. Compatible with OpenAI/Gemini API endpoints!')">
+              <span>⚙️</span> Engine Settings
+            </button>
+          </div>
+
+          <!-- Chat messages stream -->
+          <div class="chat-messages-container" id="chat-messages-container">
+            <div class="chat-msg thing-msg">
+              <img src="assets/images/thing_assistant.jpg" class="msg-avatar">
+              <div class="msg-bubble">
+                <span class="thing-action">*Thing scuttles across the mahogany desk and snaps fingers attentively*</span>
+                I have inspected the crime scene alongside Wednesday. You can ask me to analyze the <strong>Footprint</strong>, the <strong>Torn Letter</strong>, the <strong>Library Register</strong>, or evaluate whether the <strong>Professor</strong>, <strong>Student</strong>, or <strong>Librarian</strong> is deceiving us. What would you like to deduce?
+              </div>
+            </div>
+          </div>
+
+          <!-- Suggestion Chips Bar -->
+          <div class="assistant-suggestions">
+            <div class="suggestion-chip">🔍 Analyze the Footprint evidence</div>
+            <div class="suggestion-chip">✉️ Analyze the Torn Letter</div>
+            <div class="suggestion-chip">📖 Analyze the Altered Register</div>
+            <div class="suggestion-chip">🧪 Evaluate Dr. Graves' alibi</div>
+            <div class="suggestion-chip">🎨 Evaluate Julian Crane's alibi</div>
+            <div class="suggestion-chip">🗝️ Evaluate Madam Vance's alibi</div>
+            <div class="suggestion-chip">💡 Give me a deductive hint</div>
+          </div>
+
+          <!-- Chat Input Bar -->
+          <div class="assistant-input-bar">
+            <input type="text" id="assistant-user-input" class="assistant-input" placeholder="Ask Thing anything about the case, evidence, or suspect alibis...">
+            <button class="btn-send" id="btn-assistant-send">
+              <span>Send</span> <span>➤</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW 6: FINAL VERDICT (ACCUSATION CHAMBER)
+           ================================================================ -->
+      <section class="view-section" id="view-verdict">
+        <div class="section-header">
+          <div class="section-tag">THE TRIBUNAL</div>
+          <h2 class="section-title">THE FINAL VERDICT</h2>
+          <p class="section-desc">Synthesize your clues, identify the perpetrator, and present undeniable evidence to solve the mystery of the Codex Nocturna.</p>
+        </div>
+
+        <div class="verdict-container">
+          <div class="verdict-header">
+            <h3 class="verdict-title">WHO STOLE THE ANCIENT BOOK?</h3>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Review your reasoning carefully. Wednesday does not tolerate careless accusations.</p>
+          </div>
+
+          <!-- Step 1: Accuse Culprit -->
+          <div class="verdict-step">
+            <div class="step-label"><span>STEP 1</span> // IDENTIFY THE CULPRIT</div>
+            <div class="culprits-grid">
+              <div class="culprit-choice-card" data-culprit="librarian">
+                <img src="assets/images/suspect_librarian.jpg" class="culprit-choice-img" alt="Madam Vance">
+                <h4>Madam Thalia Vance</h4>
+                <span>Chief Archivist</span>
+              </div>
+              <div class="culprit-choice-card" data-culprit="student">
+                <img src="assets/images/suspect_student.jpg" class="culprit-choice-img" alt="Julian Crane">
+                <h4>Julian Crane</h4>
+                <span>Nocturnal Student</span>
+              </div>
+              <div class="culprit-choice-card" data-culprit="professor">
+                <img src="assets/images/suspect_professor.jpg" class="culprit-choice-img" alt="Dr. Arthur Graves">
+                <h4>Dr. Arthur Graves</h4>
+                <span>Professor of Alchemy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Select Decisive Evidence -->
+          <div class="verdict-step">
+            <div class="step-label"><span>STEP 2</span> // DECISIVE FORENSIC PROOF (SELECT EVIDENCE)</div>
+            <div class="evidence-choice-grid">
+              <div class="evidence-choice-card" data-evidence="footprint">
+                <img src="assets/images/evidence_footprint.jpg" class="evidence-choice-thumb" alt="Footprint">
+                <div class="evidence-choice-info">
+                  <h5>Diamond-Tread Footprint</h5>
+                  <p>Orthopedic size 11 boot + violet potassium residue</p>
+                </div>
+              </div>
+              <div class="evidence-choice-card" data-evidence="letter">
+                <img src="assets/images/evidence_torn_letter.jpg" class="evidence-choice-thumb" alt="Torn Letter">
+                <div class="evidence-choice-info">
+                  <h5>Charred Torn Letter</h5>
+                  <p>Raven-flask wax seal + midnight rendezvous</p>
+                </div>
+              </div>
+              <div class="evidence-choice-card" data-evidence="register">
+                <img src="assets/images/evidence_register.jpg" class="evidence-choice-thumb" alt="Register">
+                <div class="evidence-choice-info">
+                  <h5>Altered Library Register</h5>
+                  <p>11:58 PM chemical erasure + "A.G." ghost ink</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Motive -->
+          <div class="verdict-step">
+            <div class="step-label"><span>STEP 3</span> // PRIMARY MOTIVE</div>
+            <div class="motive-choice-grid">
+              <div class="motive-choice-item" data-motive="alchemy_ritual">
+                <span>🧪</span>
+                <div>
+                  <strong>Forbidden Shadow Transmutation:</strong> Seeking to utilize the 14th-century alchemical rituals to achieve forbidden arcane power.
+                </div>
+              </div>
+              <div class="motive-choice-item" data-motive="black_market">
+                <span>💰</span>
+                <div>
+                  <strong>Black Market Antiquities Sale:</strong> Intending to smuggle the priceless grimoire to private occult collectors outside Nevermore.
+                </div>
+              </div>
+              <div class="motive-choice-item" data-motive="student_prank">
+                <span>🎭</span>
+                <div>
+                  <strong>Student Rebellion / Anarchist Prank:</strong> Stealing the book to embarrass the academy administration and avoid expulsion.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Verdict Actions -->
+          <div class="verdict-actions">
+            <button class="btn-accuse" id="btn-submit-verdict">
+              <span>⚖️</span> RENDER FINAL VERDICT
+            </button>
+          </div>
+
+          <!-- Failure Result Panel -->
+          <div class="verdict-result-panel result-failure" id="verdict-result-failure">
+            <div class="result-badge">INCORRECT DEDUCTION</div>
+            <h3 class="result-title">"Emotion Has Clouded Your Judgement."</h3>
+            <p class="result-quote" id="fail-hint-text">Review your evidence carefully before Principal Weems hears of this.</p>
+            <button class="btn-secondary" id="btn-fail-retry">
+              <span>🔄</span> Re-examine Evidence & Try Again
+            </button>
+          </div>
+
+          <!-- Success Result Panel (Case Solved) -->
+          <div class="verdict-result-panel result-success" id="verdict-result-success">
+            <div class="result-badge">CASE SOLVED • 100% ACCURACY</div>
+            <h3 class="result-title">EXCELLENT DETECTIVE WORK. WEDNESDAY APPROVES.</h3>
+            <p class="result-quote">
+              "Most people flee the shadows. You dismantled them methodically. Dr. Arthur Graves has been apprehended in his alchemy laboratory with the Codex Nocturna in his possession."
+            </p>
+
+            <div class="result-solution-breakdown">
+              <div class="solution-step-item">
+                <h5>1. THE FOOTPRINT EVIDENCE:</h5>
+                <p>The size 11 diamond grid tread matched Dr. Graves’ bespoke orthopedic laboratory boots. The violet chemical residue was potassium permanganate from his mandrake extraction bench.</p>
+              </div>
+              <div class="solution-step-item">
+                <h5>2. THE CHARRED TORN LETTER:</h5>
+                <p>The cracked wax seal featured the raven clutching an alchemy crucible—the registered signet of Dr. Graves’ Dark Antiquities office.</p>
+              </div>
+              <div class="solution-step-item">
+                <h5>3. THE ALTERED LIBRARY REGISTER:</h5>
+                <p>Dr. Graves utilized his master faculty clearance to enter the archives at 11:58 PM. He took the Codex Nocturna, then applied an acidic solvent from his lab to dissolve his own signature and fabricate an alibi.</p>
+              </div>
+            </div>
+
+            <!-- Scorecard Summary -->
+            <div class="scorecard-grid">
+              <div class="scorecard-item">
+                <div class="scorecard-val" id="score-final">950</div>
+                <div class="scorecard-lbl">Detective Score</div>
+              </div>
+              <div class="scorecard-item">
+                <div class="scorecard-val" id="score-time">3m 42s</div>
+                <div class="scorecard-lbl">Case Duration</div>
+              </div>
+              <div class="scorecard-item">
+                <div class="scorecard-val" id="score-clues">3/3</div>
+                <div class="scorecard-lbl">Clues Secured</div>
+              </div>
+              <div class="scorecard-item">
+                <div class="scorecard-val" id="score-rank">HIGH INQUISITOR</div>
+                <div class="scorecard-lbl">Detective Rank</div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <button class="btn-primary" onclick="window.WEDNESDAY_APP.switchView('evidence')">
+                <span>📜</span> Review Case Archive
+              </button>
+              <button class="btn-secondary" id="btn-restart-case">
+                <span>🔄</span> Play Again (Reset Case)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Floating Back-to-Top Button -->
+  <button class="scroll-to-top-btn" id="btn-scroll-top" title="Scroll Back to Top" aria-label="Scroll Back to Top">
+    <span>▲</span>
+  </button>
+
+  <!-- ====================================================================
+       MODALS
+       ==================================================================== -->
+
+  <!-- Evidence Inspection Modal -->
+  <div class="modal-overlay" id="evidence-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close Modal">✕</button>
+      <div class="modal-body">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-gold); letter-spacing: 2px;" id="modal-clue-category">PHYSICAL EVIDENCE</span>
+          <h2 style="font-family: var(--font-serif-display); font-size: 1.8rem; color: var(--text-white); margin-top: 0.2rem;" id="modal-clue-title">Forensic Clue Title</h2>
+        </div>
+
+        <img src="" alt="Forensic Clue" class="forensic-modal-img" id="modal-clue-img">
+
+        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;" id="modal-clue-desc"></p>
+
+        <div class="forensic-dossier-grid">
+          <div class="forensic-datum">
+            <div class="datum-lbl">Estimated Timestamp</div>
+            <div class="datum-val" id="datum-timestamp"></div>
+          </div>
+          <div class="forensic-datum">
+            <div class="datum-lbl">Material / Tread / Seal</div>
+            <div class="datum-val" id="datum-sole"></div>
+          </div>
+          <div class="forensic-datum">
+            <div class="datum-lbl">Chemical / Heraldry Analysis</div>
+            <div class="datum-val" id="datum-chemical"></div>
+          </div>
+          <div class="forensic-datum">
+            <div class="datum-lbl">Contradiction with Alibis</div>
+            <div class="datum-val" id="datum-contradiction" style="color: #FCA5A5;"></div>
+          </div>
+        </div>
+
+        <div style="background: rgba(35, 18, 60, 0.5); border-left: 3px solid var(--purple-primary); padding: 1rem; border-radius: 0 8px 8px 0;">
+          <div style="font-family: var(--font-serif); font-size: 0.8rem; color: var(--accent-lavender); margin-bottom: 0.3rem;">👁️ WEDNESDAY'S FORENSIC DEDUCTION:</div>
+          <p style="font-family: var(--font-mono); font-size: 0.88rem; color: #E9D5FF; font-style: italic;" id="modal-wednesday-quote"></p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap;">
+          <button class="btn-primary" id="btn-modal-collect" style="flex: 1;">
+            <span>📜</span> Collect Clue (+100 Pts)
+          </button>
+          <button class="btn-secondary" id="btn-modal-discuss-thing">
+            <span>✋</span> Discuss With Thing
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How To Play Modal -->
+  <div class="modal-overlay" id="how-to-play-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close Modal">✕</button>
+      <div class="modal-body">
+        <h2 style="font-family: var(--font-serif-display); font-size: 1.8rem; color: var(--text-white);">HOW TO SOLVE THE MYSTERY</h2>
+        <p style="color: var(--text-muted);">Step into Nevermore Academy as Wednesday Addams' investigative partner. Follow these steps:</p>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="background: rgba(9, 8, 15, 0.6); border-left: 3px solid var(--purple-primary); padding: 0.9rem; border-radius: 0 6px 6px 0;">
+            <strong style="color: var(--accent-lavender);">1. Explore the 3D Library:</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Drag to rotate the camera, scroll to zoom. Click the three glowing purple markers to find the Muddy Footprint, the Torn Letter, and the Altered Register.</p>
+          </div>
+          <div style="background: rgba(9, 8, 15, 0.6); border-left: 3px solid var(--accent-lavender); padding: 0.9rem; border-radius: 0 6px 6px 0;">
+            <strong style="color: var(--accent-lavender);">2. Collect Clues into Your Notebook:</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Read the forensic analysis and click 'Collect Clue'. Unlocked clues enable you to confront suspects directly with physical proof.</p>
+          </div>
+          <div style="background: rgba(9, 8, 15, 0.6); border-left: 3px solid var(--accent-gold); padding: 0.9rem; border-radius: 0 6px 6px 0;">
+            <strong style="color: var(--accent-gold);">3. Interrogate Suspects & Consult Thing:</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Probe Madam Vance, Julian Crane, and Dr. Graves. Ask Thing for deduction tips and connect clues on the Pinboard.</p>
+          </div>
+          <div style="background: rgba(9, 8, 15, 0.6); border-left: 3px solid var(--accent-crimson); padding: 0.9rem; border-radius: 0 6px 6px 0;">
+            <strong style="color: var(--accent-crimson);">4. Deliver the Final Verdict:</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">Identify the thief, present decisive evidence, and establish the motive to win Wednesday's approval and earn the rank of High Inquisitor.</p>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="document.getElementById('how-to-play-modal').classList.remove('active'); window.WEDNESDAY_APP.switchView('room');">
+          <span>🕯️</span> Begin Investigation Now
+        </button>
+      </div>
+    </div>
+  <!-- Fullscreen Horror Jumpscare Overlay -->
+  <div class="jumpscare-overlay" id="jumpscare-overlay">
+    <div class="jumpscare-flash"></div>
+    <img src="assets/images/jumpscare_specter.jpg" alt="Horror Specter" class="jumpscare-img">
+    <div class="jumpscare-quote" id="jumpscare-quote">"DID YOU THINK THE SHADOWS WERE EMPTY?"</div>
+  </div>
+
+  <!-- Lightning Flash Overlay -->
+  <div class="lightning-flash" id="lightning-flash"></div>
+
+  <!-- Vendor Scripts (Local Three.js & OrbitControls with CDN fallback) -->
+  <script src="assets/vendor/three.min.js"></script>
+  <script src="assets/vendor/OrbitControls.js"></script>
+  <script>
+    // Resilient fallback in case vendor scripts failed to load
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>');
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="main.js"></script>
+</body>
+</html>
