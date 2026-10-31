@@ -143,6 +143,26 @@
           ]
         }
       },
+      motives: [
+        {
+          id: 'alchemy_ritual',
+          icon: '🧪',
+          title: 'Forbidden Shadow Transmutation',
+          description: 'Seeking to utilize the 14th-century alchemical rituals to achieve forbidden arcane power and immortal transmutation.'
+        },
+        {
+          id: 'black_market',
+          icon: '💰',
+          title: 'Black-Market Antiquities Smuggling',
+          description: 'Smuggling the priceless occult grimoire to private billionaire artifact collectors outside Nevermore.'
+        },
+        {
+          id: 'student_prank',
+          icon: '🎭',
+          title: 'Anarchist Student Rebellion',
+          description: 'Stealing the sacred text to ridicule the academy faculty, embarrass the archivist, and avoid midterm expulsions.'
+        }
+      ],
       solution: {
         culpritId: 'professor',
         motive: 'alchemy_ritual',
@@ -274,11 +294,31 @@
           ]
         }
       },
+      motives: [
+        {
+          id: 'ancestral_vendetta',
+          icon: '☠️',
+          title: 'Outcast Eradication & Ancestral Crackstone Vendetta',
+          description: 'Neutralizing Headmistress Weems to dismantle Nevermore\'s administrative defenses, avenge the Gates bloodline, and clear the path for the resurrection of Joseph Crackstone.'
+        },
+        {
+          id: 'botanical_bioweapon',
+          icon: '🌱',
+          title: 'Illicit Botanical Bio-Weapon Patenting',
+          description: 'Incapacitating the Headmistress to covertly harvest Nevermore\'s protected carnivorous flora and smuggle patented neurotoxins to corporate pharmaceutical buyers.'
+        },
+        {
+          id: 'faculty_blackmail',
+          icon: '📜',
+          title: 'Faculty Tenure & Disciplinary Blackmail',
+          description: 'Silencing Principal Weems before the administration discovered her falsified teaching credentials and unauthorized access to restricted greenhouse seed vaults.'
+        }
+      ],
       solution: {
         culpritId: 'botanist',
-        motive: 'poison_administration',
+        motive: 'ancestral_vendetta',
         decisiveEvidence: 'register',
-        explanation: 'Marilyn Thornhill cultivated a lethal hybrid of nightshade and hemlock in Greenhouse 3. She accessed the bell tower tea room at 4:50 PM, dosed Principal Weems’ personal black chalice, and concealed her gloves behind the copper pipes.'
+        explanation: 'Marilyn Thornhill (Laurel Gates) cultivated a lethal hybrid of nightshade and hemlock in Greenhouse 3. She poisoned Principal Weems\' tea chalice to dismantle Nevermore\'s leadership and fulfill her family\'s ancestral vendetta to eradicate all outcasts.'
       }
     },
 
@@ -405,9 +445,29 @@
           ]
         }
       },
+      motives: [
+        {
+          id: 'shatter_ancient_wards',
+          icon: '🌊',
+          title: 'Shattering Ancient Siren-Dampening Wards',
+          description: 'Harnessing the solar eclipse resonance to test if amplified 432 Hz siren vocal frequencies could shatter the academy\'s ancient stone wards that suppress siren song compulsion.'
+        },
+        {
+          id: 'prefect_rivalry_sabotage',
+          icon: '🏆',
+          title: 'Poe Cup Elimination & Prefect Rivalry',
+          description: 'Deliberately sabotaging the courtyard below to incapacitate rival team leaders before the annual Poe Cup canoe race and preserve her supremacy.'
+        },
+        {
+          id: 'architectural_sabotage',
+          icon: '🔨',
+          title: 'Forced Belfry Evacuation & Renovation Fraud',
+          description: 'Staging structural masonry failures to compel the Board of Trustees to condemn the historic tower and reallocate dormitory funds to the Siren choral hall.'
+        }
+      ],
       solution: {
         culpritId: 'siren',
-        motive: 'sonic_experiment',
+        motive: 'shatter_ancient_wards',
         decisiveEvidence: 'letter',
         explanation: 'Bianca Barclay climbed to the north parapet during the eclipse to test if her siren vocal frequencies could shatter stone gargoyle wards. Using her silver 432 Hz tuning fork, she harmonized with the stone until acoustic resonance sheared the statue clean off.'
       }
@@ -536,9 +596,29 @@
           ]
         }
       },
+      motives: [
+        {
+          id: 'psychic_trance_compulsion',
+          icon: '🎨',
+          title: 'Somnambulic Psychic Trance & Living Art Manifestation',
+          description: 'Driven by uncontrollable prophetic nightmares and living brushstrokes that induced a hypnotic sleepwalking state, compelling him to harvest the relic skull to manifest his visionary premonitions.'
+        },
+        {
+          id: 'bloodline_defilement',
+          icon: '💀',
+          title: 'Ancestral Necromancy & Blood Curse Ritual',
+          description: 'Deliberately desecrating Goody Addams\' tomb to extract psychic bone marrow for forbidden necromantic resurrection spells against the Addams family.'
+        },
+        {
+          id: 'spiteful_framing',
+          icon: '🥀',
+          title: 'Spiteful Retaliation & Wednesday\'s Expulsion',
+          description: 'Stealing the Addams family heirloom to orchestrate an elaborate frame-up that would humiliate Wednesday Addams and have her expelled from Nevermore.'
+        }
+      ],
       solution: {
         culpritId: 'artist',
-        motive: 'psychic_trance',
+        motive: 'psychic_trance_compulsion',
         decisiveEvidence: 'letter',
         explanation: 'Xavier Thorpe entered a deep psychic trance at midnight. Compelled by his prophetic visions, he sleepwalked into the Crackstone crypt, severed the silver skull, and left behind a black dahlia cut with his palette knife to manifest his living painting.'
       }
@@ -668,9 +748,29 @@
           ]
         }
       },
+      motives: [
+        {
+          id: 'hyde_hypnotic_subjugation',
+          icon: '👁️',
+          title: 'Hypnotic Subjugation & Hyde Weaponization',
+          description: 'Harvesting concentrated Hydral-4 neuro-stimulants to enforce psychological dependency, deepen hypnotic trigger conditioning, and command the Hyde as an obedient clinical weapon.'
+        },
+        {
+          id: 'black_market_narcotics',
+          icon: '💊',
+          title: 'Black-Market Pharmaceutical Trafficking',
+          description: 'Breaching the locked clinic dispensary purely to steal controlled narcotic stimulants and sell them to illegal pharmaceutical syndicates in Jericho.'
+        },
+        {
+          id: 'uncontrolled_feral_rampage',
+          icon: '🐾',
+          title: 'Unprovoked Predatory Bloodlust',
+          description: 'A completely random, feral beast rampage driven solely by primal animal hunger without human orchestration, psychological intent, or sedative manipulation.'
+        }
+      ],
       solution: {
         culpritId: 'therapist',
-        motive: 'hypnotic_control',
+        motive: 'hyde_hypnotic_subjugation',
         decisiveEvidence: 'register',
         explanation: 'Dr. Valerie Kinbott utilized neuro-stimulant Hydral-4 cocktails and behavioral hypnosis to awaken and control the dormant Hyde. She breached the dispensary at 3:15 AM with the beast to harvest more stimulants and enforce hypnotic compliance.'
       }
@@ -984,6 +1084,8 @@
     startTime: Date.now()
   };
 
+  let verdictSelection = { suspect: null, evidence: [], motive: null };
+
   function loadGameState() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -1167,9 +1269,10 @@
     currentCaseId = caseId;
     CASE_DATA = ALL_CASES[currentCaseId];
 
-    // Reset suspect selection for the active case
+    // Reset suspect and verdict selection for the active case
     const firstSuspectKey = Object.keys(CASE_DATA.suspects)[0];
     gameState.selectedSuspect = firstSuspectKey;
+    verdictSelection = { suspect: null, evidence: [], motive: null };
 
     saveGameState();
 
@@ -2454,9 +2557,11 @@
     if (input.includes('who did it') || input.includes('who is the culprit') || input.includes('who is guilty') || input.includes('who stole') || input.includes('who poisoned') || input.includes('who is lying') || input.includes('solution') || input.includes('who is suspicious') || input.includes('verdict')) {
       const culprit = CASE_DATA.suspects[CASE_DATA.solution.culpritId];
       const decisive = CASE_DATA.clues[CASE_DATA.solution.decisiveEvidence];
+      const curMotiveObj = CASE_DATA.motives ? CASE_DATA.motives.find(m => m.id === CASE_DATA.solution.motive) : null;
+      const motiveTitle = curMotiveObj ? curMotiveObj.title : CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase();
       return {
         text: `*Thing leans in and taps decisively on the case file* In <strong>${CASE_DATA.title}</strong>, all forensic vectors point to <strong>${culprit.name} (${culprit.role})</strong>!<br><br>` +
-              `⚖️ <strong>Criminal Motive:</strong> ${CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase()}<br>` +
+              `⚖️ <strong>Criminal Motive:</strong> ${motiveTitle}<br>` +
               `🔎 <strong>Decisive Physical Proof:</strong> The <em>${decisive.name}</em>, which directly shatters their alibi.<br>` +
               `💀 <strong>Wednesday's Deduction:</strong> ${CASE_DATA.solution.explanation}`,
         action: '*Thing points an accusing finger directly at the culprit profile*'
@@ -2465,9 +2570,13 @@
 
     if (input.includes('motive') || input.includes('why')) {
       const culprit = CASE_DATA.suspects[CASE_DATA.solution.culpritId];
+      const curMotiveObj = CASE_DATA.motives ? CASE_DATA.motives.find(m => m.id === CASE_DATA.solution.motive) : null;
+      const motiveTitle = curMotiveObj ? curMotiveObj.title : CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase();
+      const motiveDesc = curMotiveObj ? curMotiveObj.description : '';
       return {
-        text: `*Thing scuttles between witness testimonies* The criminal motive in <strong>${CASE_DATA.title}</strong> is <strong>${CASE_DATA.solution.motive.replace(/_/g, ' ').toUpperCase()}</strong>. ` +
-              `<strong>${culprit.name}</strong> acted with cold premeditation. Confront them with physical clues in the Interrogation Chamber to break their composure!`,
+        text: `*Thing scuttles between witness testimonies* The criminal motive in <strong>${CASE_DATA.title}</strong> is <strong>${motiveTitle}</strong>.<br><br>` +
+              (motiveDesc ? `<em>"${motiveDesc}"</em><br><br>` : '') +
+              `<strong>${culprit.name}</strong> acted with cold premeditation. Establish this primary motive at the Tribunal to render the correct final verdict!`,
         action: '*Thing mimics counting stolen gold coins and whispers*'
       };
     }
@@ -2730,8 +2839,6 @@
   // 11. FINAL VERDICT & ACCUSATION TRIBUNAL
   // ==========================================================================
 
-  let verdictSelection = { suspect: null, evidence: [], motive: null };
-
   function renderVerdictOptions() {
     const culpritsGrid = document.querySelector('.culprits-grid');
     if (!culpritsGrid) return;
@@ -2759,6 +2866,22 @@
             <div class="evidence-choice-info">
               <h5>${c.name}</h5>
               <p>${c.category}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Step 3: Dynamic Primary Motives for the Active Case
+    const motiveGrid = document.querySelector('.motive-choice-grid');
+    if (motiveGrid && CASE_DATA.motives) {
+      motiveGrid.innerHTML = CASE_DATA.motives.map(m => {
+        const isSelected = (verdictSelection.motive === m.id);
+        return `
+          <div class="motive-choice-item ${isSelected ? 'selected' : ''}" data-motive="${m.id}" onclick="window.WEDNESDAY_APP.selectVerdictMotive('${m.id}')">
+            <span>${m.icon || '⚖️'}</span>
+            <div>
+              <strong>${m.title}:</strong> ${m.description}
             </div>
           </div>
         `;
@@ -2891,6 +3014,8 @@
           hint = `You accused ${CASE_DATA.suspects[verdictSelection.suspect].name}. However, physical evidence contradicts this. Check who had specialized access to the crime scene.`;
         } else if (!hasDecisive) {
           hint = `You identified the correct culprit (${CASE_DATA.suspects[verdictSelection.suspect].name}), but your supporting evidence fails to provide the undeniable legal contradiction.`;
+        } else if (!isCorrectMotive) {
+          hint = `You correctly identified ${CASE_DATA.suspects[verdictSelection.suspect].name} and decisive physical evidence, but your alleged criminal motive is flawed. Analyze what truly drove them to commit this crime.`;
         }
         document.getElementById('fail-hint-text').textContent = hint;
         failPanel.scrollIntoView({ behavior: 'smooth' });
@@ -3390,10 +3515,16 @@
       chip.addEventListener('click', () => sendThingMessage(chip.textContent.trim()));
     });
 
-    // Motive selection
-    document.querySelectorAll('.motive-choice-item').forEach(item => {
-      item.addEventListener('click', () => selectVerdictMotive(item.dataset.motive));
-    });
+    // Motive selection delegation
+    const motiveGrid = document.querySelector('.motive-choice-grid');
+    if (motiveGrid) {
+      motiveGrid.addEventListener('click', (e) => {
+        const item = e.target.closest('.motive-choice-item');
+        if (item && item.dataset.motive) {
+          selectVerdictMotive(item.dataset.motive);
+        }
+      });
+    }
 
     const btnAccuse = document.getElementById('btn-submit-verdict');
     if (btnAccuse) btnAccuse.addEventListener('click', submitAccusation);
@@ -3446,6 +3577,7 @@
     selectSuspect: (key) => renderSuspectView(key),
     selectVerdictSuspect,
     toggleVerdictEvidence,
+    selectVerdictMotive,
     triggerJumpscare,
     triggerLightning,
     playOrganChord: () => audio.playOrganChord(),
