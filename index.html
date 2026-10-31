@@ -157,17 +157,8 @@
             <div class="landing-subtitle parallax-text reveal-on-scroll delay-2">AI MYSTERY INTELLIGENCE SYSTEM</div>
             <p class="landing-tagline reveal-on-scroll delay-2">"Think Like Wednesday. Uncover What Others Cannot."</p>
 
-            <!-- 5-Case Selector Hub Pills -->
-            <div class="case-selector-bar reveal-on-scroll delay-2" style="justify-content: center; margin: 0.5rem 0;" id="landing-case-pills">
-              <div class="case-pill active" data-case="CASE_001"><span>CASE 001: Midnight Disappearance</span> <span class="case-status-badge">ACTIVE</span></div>
-              <div class="case-pill" data-case="CASE_002"><span>CASE 002: Bell Tower Poisoning</span> <span class="case-status-badge">UNSOLVED</span></div>
-              <div class="case-pill" data-case="CASE_003"><span>CASE 003: Gargoyle's Curse</span> <span class="case-status-badge">UNSOLVED</span></div>
-              <div class="case-pill" data-case="CASE_004"><span>CASE 004: Phantom of the Crypt</span> <span class="case-status-badge">UNSOLVED</span></div>
-              <div class="case-pill" data-case="CASE_005"><span>CASE 005: Hyde's Awakening</span> <span class="case-status-badge">UNSOLVED</span></div>
-            </div>
-
             <p class="landing-desc reveal-on-scroll delay-3" id="landing-case-desc">
-              At exactly midnight, Nevermore's forbidden <em>Codex Nocturna</em> vanished from the restricted archives. Three suspects were present. Each tells a different story. Wednesday suspects someone is concealing the dark truth. Your intelligence is your greatest weapon.
+              At exactly midnight, Nevermore's forbidden <em>Codex Nocturna</em> vanished from the restricted archives into the zero-gravity void. Three suspects were present. Each tells a different story. Wednesday suspects someone is concealing the dark truth. Your intelligence is your greatest weapon.
             </p>
 
             <div class="landing-buttons reveal-on-scroll delay-3">
@@ -177,8 +168,8 @@
               <button class="btn-secondary" id="btn-explore-index" onclick="window.WEDNESDAY_APP.scrollToIndex()">
                 <span>🗂️</span> Master Archival Index
               </button>
-              <button class="btn-secondary" id="btn-how-to-play" onclick="window.WEDNESDAY_APP.scrollToCases()">
-                <span>📖</span> 5 Case Dossiers
+              <button class="btn-secondary" id="btn-how-to-play" onclick="window.WEDNESDAY_APP.switchView('evidence')">
+                <span>🔬</span> Crime Lab Dossier
               </button>
             </div>
 
@@ -191,7 +182,7 @@
               <span id="ticker-quote">"I find ordinary life to be a soul-sucking void of meaningless affirmation. Now, a midnight heist of forbidden shadow grimoires? That's poetry."</span>
             </div>
 
-            <!-- Animated Scroll Down Indicator (FIXED: Smooth scrolls to Master Index) -->
+            <!-- Animated Scroll Down Indicator (Smooth scrolls to Master Index) -->
             <div class="scroll-indicator-container" id="landing-scroll-indicator" onclick="window.WEDNESDAY_APP.scrollDownToOverview()">
               <div class="scroll-mouse-icon">
                 <div class="scroll-mouse-wheel"></div>
@@ -228,18 +219,18 @@
                 <button class="index-card-btn"><span>Enter 3D Void</span> →</button>
               </div>
 
-              <!-- Card 2: 5 Nevermore Cases -->
-              <div class="index-card reveal-on-scroll delay-1" onclick="window.WEDNESDAY_APP.scrollToCases()">
+              <!-- Card 2: Active Investigation Dossier -->
+              <div class="index-card reveal-on-scroll delay-1" onclick="window.WEDNESDAY_APP.switchView('evidence')">
                 <div class="index-card-icon">📁</div>
-                <div class="index-card-badge">5 SOLVABLE FILES</div>
-                <h3 class="index-card-title">Nevermore Crime Dossiers (Cases 1-5)</h3>
-                <p class="index-card-desc">Five distinct mysteries spanning the Restricted Archives, North Bell Tower, Belfry Parapet, Crackstone Crypt, and Medical Dispensary. Each has 3 unique physical clues and suspect alibis.</p>
+                <div class="index-card-badge">ACTIVE CRIME FILE</div>
+                <h3 class="index-card-title">Forensic Crime Lab & Clues Dossier</h3>
+                <p class="index-card-desc">Access your active investigation dossier. Run chemical reagent tests, toggle 365nm UV blacklight analysis, and review legal contradiction matrices that break suspect alibis.</p>
                 <div class="index-card-meta">
-                  <span>⚡ 5 Storylines</span>
-                  <span>🔍 15 Forensic Clues</span>
-                  <span>⚖️ 5 Culprits</span>
+                  <span>🧪 Reagent Drops</span>
+                  <span>🔬 UV Blacklight</span>
+                  <span>⚖️ Alibi Breakers</span>
                 </div>
-                <button class="index-card-btn"><span>Browse 5 Cases</span> →</button>
+                <button class="index-card-btn"><span>Open Crime Lab</span> →</button>
               </div>
 
               <!-- Card 3: Evidence Dossier & Pinboard -->
@@ -330,24 +321,7 @@
         </section>
 
         <!-- ------------------------------------------------------------
-             SECTION 3: 5 SOLVABLE CASE DOSSIERS SHOWCASE
-             ------------------------------------------------------------ -->
-        <section class="landing-section-block" id="landing-case-showcase">
-          <div class="section-container">
-            <div class="section-header reveal-on-scroll">
-              <div class="section-tag">NEVERMORE CRIME REGISTER</div>
-              <h2 class="section-title parallax-text">THE 5 NEVERMORE CASE FILES</h2>
-              <p class="section-desc">Each case features unique 3D floating evidence items, specialized suspect interrogation trees, and distinct forensic contradictions.</p>
-            </div>
-
-            <div class="cases-showcase-grid" id="cases-showcase-container">
-              <!-- Dynamically populated by renderCasesShowcase() in main.js -->
-            </div>
-          </div>
-        </section>
-
-        <!-- ------------------------------------------------------------
-             SECTION 4: FORENSIC METHODOLOGY & RULES
+             SECTION 3: FORENSIC METHODOLOGY & RULES
              ------------------------------------------------------------ -->
         <section class="landing-section-block" id="landing-rules-methodology">
           <div class="section-container">
@@ -506,8 +480,25 @@
 
         <!-- Tab 1: Clue Cards Grid -->
         <div id="evidence-tab-clues">
+          <!-- Interactive Forensic Crime Lab Workbench Header -->
+          <div class="forensic-lab-header">
+            <div class="lab-status-block">
+              <div class="lab-flask-icon">🧪</div>
+              <div class="lab-title-text">
+                <h4>NEVERMORE FORENSIC CRIME LABORATORY</h4>
+                <p>Advanced Spectrometry • Chemical Reagent Testing • 365nm UV Blacklight Scanner</p>
+              </div>
+            </div>
+            <div class="lab-filter-pills">
+              <button class="lab-filter-btn active" data-filter="all" onclick="window.WEDNESDAY_APP.filterClues('all')">All Relics</button>
+              <button class="lab-filter-btn" data-filter="chemical" onclick="window.WEDNESDAY_APP.filterClues('chemical')">Chemical / Toxin</button>
+              <button class="lab-filter-btn" data-filter="physical" onclick="window.WEDNESDAY_APP.filterClues('physical')">Physical Evidence</button>
+              <button class="lab-filter-btn" data-filter="document" onclick="window.WEDNESDAY_APP.filterClues('document')">Documentary</button>
+            </div>
+          </div>
+
           <div class="clues-grid" id="clues-cards-grid">
-            <!-- Dynamically populated by main.js -->
+            <!-- Dynamically populated by main.js with interactive workbench tools -->
           </div>
 
           <!-- User Notes Pad -->
@@ -571,50 +562,7 @@
         <div class="suspects-wrapper">
           <!-- Left Nav Cards -->
           <div class="suspects-nav-list">
-            <!-- Librarian Card -->
-            <div class="suspect-nav-card active" data-suspect="librarian">
-              <img src="assets/images/suspect_librarian.jpg" alt="Madam Vance" class="nav-card-portrait">
-              <div class="nav-card-info">
-                <h4>Madam Thalia Vance</h4>
-                <span class="suspect-role">Chief Archivist</span>
-                <div class="nav-card-suspicion">
-                  <div class="suspicion-bar-mini">
-                    <div class="suspicion-fill-mini" style="width: 40%;"></div>
-                  </div>
-                  <span class="suspicion-percent-mini">40%</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Student Card -->
-            <div class="suspect-nav-card" data-suspect="student">
-              <img src="assets/images/suspect_student.jpg" alt="Julian Crane" class="nav-card-portrait">
-              <div class="nav-card-info">
-                <h4>Julian Crane</h4>
-                <span class="suspect-role">Nocturnal Student</span>
-                <div class="nav-card-suspicion">
-                  <div class="suspicion-bar-mini">
-                    <div class="suspicion-fill-mini" style="width: 65%;"></div>
-                  </div>
-                  <span class="suspicion-percent-mini">65%</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Professor Card -->
-            <div class="suspect-nav-card" data-suspect="professor">
-              <img src="assets/images/suspect_professor.jpg" alt="Dr. Arthur Graves" class="nav-card-portrait">
-              <div class="nav-card-info">
-                <h4>Dr. Arthur Graves</h4>
-                <span class="suspect-role">Professor of Alchemy</span>
-                <div class="nav-card-suspicion">
-                  <div class="suspicion-bar-mini">
-                    <div class="suspicion-fill-mini" style="width: 45%;"></div>
-                  </div>
-                  <span class="suspicion-percent-mini">45%</span>
-                </div>
-              </div>
-            </div>
+            <!-- Dynamically populated by renderSuspectView() for active case suspects -->
           </div>
 
           <!-- Active Interrogation Chamber Panel -->
@@ -1003,6 +951,18 @@
 
   <!-- Lightning Flash Overlay -->
   <div class="lightning-flash" id="lightning-flash"></div>
+
+  <!-- Security Lockout Modal for Locked Cases -->
+  <div class="lockout-modal-overlay" id="lockout-modal-overlay">
+    <div class="lockout-card">
+      <div class="lockout-icon">🔒</div>
+      <h3 id="lockout-modal-title">CLASSIFIED TRIBUNAL FILE</h3>
+      <p id="lockout-modal-desc">This case file is under Nevermore High Inquisitor seal. You must formally solve the prior case at the Tribunal before unlocking this record.</p>
+      <button class="btn-lockout-dismiss" onclick="document.getElementById('lockout-modal-overlay').classList.remove('active')">
+        <span>🗝️</span> Acknowledge & Return
+      </button>
+    </div>
+  </div>
 
   <!-- Vendor Scripts (Local Three.js & OrbitControls with CDN fallback) -->
   <script src="assets/vendor/three.min.js"></script>

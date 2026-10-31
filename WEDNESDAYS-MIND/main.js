@@ -19,53 +19,74 @@
       location: "Nevermore Academy - The Void Archive",
       timeOfIncident: '12:00 AM (Midnight)',
       itemStolen: 'Codex Nocturna (14th-Century Shadow Grimoire)',
-      description: 'At exactly midnight, an ancient grimoire disappeared from Nevermore’s restricted archive into the cosmic void. Three persons of interest were in the wing.',
+      description: 'At exactly midnight, an ancient grimoire disappeared from Nevermore’s restricted archive into the zero-gravity void. Three persons of interest were in the wing.',
       clues: {
         footprint: {
           id: 'clue_footprint',
           name: 'Muddy Diamond-Tread Footprint',
-          locationIn3D: { x: -3.8, y: 0.05, z: 2.2 },
+          locationIn3D: { x: -7.5, y: 2.4, z: 5.5 },
           image: 'assets/images/evidence_footprint.jpg',
           category: 'Forensic Impression',
           tags: ['#ShoeTread', '#LaboratoryResidue', '#Size11'],
-          description: 'A deep mud impression on the void dais. Distinctive interlocking diamond grid sole with heavy wear on the outer right heel. Specks of violet chemical powder cling to the ridges.',
+          description: 'A deep mud impression floating on the void dais edge. Distinctive interlocking diamond grid sole with heavy wear on the outer right heel. Specks of violet chemical powder cling to the ridges.',
           forensics: {
             timestamp: '11:55 PM - 12:05 AM',
             soleType: 'Bespoke Orthopedic Cobbled Leather Sole with Diamond Rubber Grid',
             chemicalAnalysis: 'Potassium permanganate & sulfuric salt dust (Exclusive to Advanced Alchemy Lab)',
-            contradiction: "Clears Julian (student sneakers) and Vance (size 6 Victorian boots). Directly matches Dr. Graves' bespoke laboratory footwear."
+            contradiction: "Clears Julian (student flat sneakers) and Vance (size 6 Victorian boots). Directly matches Dr. Graves' bespoke laboratory footwear."
+          },
+          uvRevelation: "Under 365nm UV excitation: Luminescent violet crystalline halo reveals potassium permanganate oxidizer (KMnO4) track from West Lab Wing.",
+          reagentProfile: {
+            compound: "Potassium Permanganate (KMnO4) + Sulfur Salts",
+            reaction: "Instant deep purple precipitation turning golden brown upon acidic reduction",
+            confidence: "99.4% Forensic Certainty",
+            reactionColor: "#a855f7"
           },
           wednesdayNote: "Amateurs always forget to wipe their boots before committing grand larceny. And the purple chemical dust? An insult to my intellect."
         },
         letter: {
           id: 'clue_letter',
           name: 'Charred Torn Letter & Wax Seal',
-          locationIn3D: { x: 2.4, y: 1.85, z: 0.5 },
+          locationIn3D: { x: 7.8, y: 4.8, z: -3.2 },
           image: 'assets/images/evidence_torn_letter.jpg',
           category: 'Physical Correspondence',
           tags: ['#WaxSeal', '#RavenFlaskInsignia', '#SecretMeeting'],
-          description: 'A burnt fragment of heavy vellum discovered near the research desk. Reads: "...we must meet at midnight Codex Nocturna will be mine ...trust no one XIII Oct." Sealed with cracked purple wax depicting an alchemy flask intertwined with a raven.',
+          description: 'A burnt fragment of heavy vellum drifting in zero-gravity. Reads: "...we must meet at midnight Codex Nocturna will be mine ...trust no one XIII Oct." Sealed with cracked purple wax depicting an alchemy flask intertwined with a raven.',
           forensics: {
             timestamp: 'Penned earlier today; scorched recently',
             sealHeraldry: 'Raven clutching an alchemy crucible (Personal crest of the Dark Antiquities Dept)',
             paperStock: 'Acid-free laboratory archival vellum',
             contradiction: 'Matches the exact signet ring and wax batch kept on Dr. Graves’ personal writing desk.'
           },
+          uvRevelation: "Under 365nm UV excitation: Fluorescent latent fingerprint discovered on the scorched wax margin matches Dr. Graves' right thumb print.",
+          reagentProfile: {
+            compound: "Beeswax-Shellac Polymer with Cobalt Violet Pigment",
+            reaction: "Soluble in warm ethanol; spectrographic curve matches Graves' private supply desk",
+            confidence: "98.9% Material Match",
+            reactionColor: "#c084fc"
+          },
           wednesdayNote: "A burning desire for secrecy, executed with disastrous thermal management. The raven seal is practically a signed confession."
         },
         register: {
           id: 'clue_register',
           name: 'Altered Library Register Ledger',
-          locationIn3D: { x: 0.1, y: 1.95, z: -0.2 },
+          locationIn3D: { x: -1.2, y: 6.8, z: -7.0 },
           image: 'assets/images/evidence_register.jpg',
           category: 'Documentary Record',
           tags: ['#ChemicalErasure', '#11:58PMLog', '#SolventHalo'],
-          description: 'The ancient bound register of archive entries. Under forensic magnification, the log entry at 11:58 PM shows chemical bleaching. The original signature was dissolved using an acidic solvent and forged over with faded ink.',
+          description: 'The ancient bound register of archive entries floating high in the void. Under forensic magnification, the log entry at 11:58 PM shows chemical bleaching. The original signature was dissolved using an acidic solvent and forged over with faded ink.',
           forensics: {
             timestamp: 'Tampered at approximately 12:02 AM',
             solventUsed: 'Acetone-acid blend common in historical manuscript conservation & alchemy labs',
             underlyingGhostInk: 'Spectroscopic traces reveal initials "A.G." checkout of Codex Nocturna',
             contradiction: "Madam Vance claims the log was untouched after 11:45 PM. The alteration proves an authorized faculty member was inside at 11:58 PM."
+          },
+          uvRevelation: "Under 365nm UV excitation: Chemical bleaching fluoresces bright cyan, exposing the dissolved iron gall initials 'A.G. - 11:58 PM'.",
+          reagentProfile: {
+            compound: "Potassium Ferrocyanide Prussian Blue Developer",
+            reaction: "Reacts with invisible ferric ions to reconstruct dissolved signature",
+            confidence: "99.8% Documentary Match",
+            reactionColor: "#38bdf8"
           },
           wednesdayNote: "Chemical erasure leaves an iridescent spectral halo. Did the culprit truly imagine that simple alchemy could fool an Addams?"
         }
@@ -141,7 +162,7 @@
         footprint: {
           id: 'clue_chalice',
           name: 'Poisoned Black Porcelain Chalice',
-          locationIn3D: { x: -3.6, y: 2.8, z: 2.0 },
+          locationIn3D: { x: -8.0, y: 4.2, z: -4.5 },
           image: 'assets/images/evidence_chalice.svg',
           category: 'Chemical Toxin',
           tags: ['#AtropaBelladonna', '#PorcelainChalice', '#HemlockAlkaloid'],
@@ -151,12 +172,19 @@
             botanicalProfile: 'Genetically altered Nightshade-Hemlock hybrid (Only cultivable in Greenhouse 3)',
             contradiction: 'Requires specialized botanical grafting skills unknown to ordinary staff.'
           },
+          uvRevelation: "Under 365nm UV excitation: Luminescent yellow-green residue reveals concentrated atropine alkaloid dried onto the rim.",
+          reagentProfile: {
+            compound: "Vitali-Morin Nitric Acid & Alcoholic KOH Test",
+            reaction: "Forms intense violet coloration confirming concentrated tropane alkaloid (Atropine)",
+            confidence: "99.7% Toxicological Match",
+            reactionColor: "#e11d48"
+          },
           wednesdayNote: "Belladonna. A classic choice for those who lack the courage for a clean blade. But the hemlock hybrid suggests botanical vanity."
         },
         letter: {
           id: 'clue_roster',
           name: 'Greenhouse Seed Vault Roster',
-          locationIn3D: { x: 3.5, y: 3.6, z: -0.5 },
+          locationIn3D: { x: 7.2, y: 2.6, z: 6.0 },
           image: 'assets/images/evidence_roster.svg',
           category: 'Documentary Record',
           tags: ['#SeedVaultLog', '#MissingBelladonna', '#TornSignature'],
@@ -166,12 +194,19 @@
             tornPaperEdge: 'Torn with left-handed fingernail shears',
             contradiction: 'Only the head botanist holds the key to the locked toxic seed safe.'
           },
+          uvRevelation: "Under 365nm UV excitation: Indented writing on the carbon sheet beneath confirms signature 'M. Thornhill - Belladonna Batch IV'.",
+          reagentProfile: {
+            compound: "Electrostatic Detection Apparatus (ESDA) Carbon Lift",
+            reaction: "Recovers indented pressure grooves with 100% legibility",
+            confidence: "99.1% Forensic Document Verification",
+            reactionColor: "#fbbf24"
+          },
           wednesdayNote: "Tearing out your signature is like burning your portrait after committing a robbery—it only emphasizes your presence."
         },
         register: {
           id: 'clue_glove',
           name: 'Soil-Stained Horticultural Glove',
-          locationIn3D: { x: -0.8, y: 4.2, z: -2.0 },
+          locationIn3D: { x: 1.5, y: 7.2, z: -6.8 },
           image: 'assets/images/evidence_glove.svg',
           category: 'Physical Residue',
           tags: ['#CarnivorousSap', '#VelvetLace', '#SmallHands'],
@@ -180,6 +215,13 @@
             timestamp: 'Left in bell tower prior to 5:00 PM tea',
             chemicalTraces: 'Drosera carnivorous orchid digestive enzymes and nightshade root dust',
             contradiction: 'Directly matches the bespoke gloves worn by Ms. Thornhill in the conservatory.'
+          },
+          uvRevelation: "Under 365nm UV excitation: Carnivorous Drosera digestive enzymes glow bright neon coral pink along the fingertips.",
+          reagentProfile: {
+            compound: "Enzymatic Biuret Protease Assay",
+            reaction: "Distinctive violet-pink enzymatic protease activity unique to Drosera carnivorous orchids",
+            confidence: "99.6% Botanical Match",
+            reactionColor: "#ec4899"
           },
           wednesdayNote: "Drosera orchid sap smells of sweet decay. Once it touches your fingers, no amount of soap can wash away the guilt."
         }
@@ -198,7 +240,7 @@
           interrogation: [
             { id: 'thornhill_where', q: 'Where were you when Principal Weems was poisoned at 5 PM?', a: 'Why, in my conservatory tending to my lovely carnivorous orchids! Pitcher plants require misting every hour on the hour, Wednesday.', wednesdayThought: 'Her smile is too sweet. Sweetness is almost always a facade for rot.' },
             { id: 'thornhill_confront_glove', q: '[Confront: Glove] We found your Drosera-stained glove behind the bell tower pipes.', a: 'Oh dear... I must have dropped it when I was inspecting the ivy on the bell tower yesterday! Anyone could have picked it up.', wednesdayThought: 'The soil on the glove was fresh and damp with 4:30 PM rain. She was in the tower today.' },
-            { id: 'thornhill_confront_roster', q: '[Confront: Roster] Three packets of lethal belladonna seeds were checked out at 4:30 PM.', a: 'I... I keep thousands of seeds! Sometimes students borrow specimens without permission! You cannot hold me responsible for stolen flora!', wednesdayThought: 'Her cheerful veneer cracks. The toxic seed safe has only one key—around her neck.' }
+            { id: 'thornhill_confront_roster', q: '[Confront: Roster] Three packets of lethal belladonna seeds were checked out at 4:30 PM under your signature.', a: 'I... I keep thousands of seeds! Sometimes students borrow specimens without permission! You cannot hold me responsible for stolen flora!', wednesdayThought: 'Her cheerful veneer cracks. The toxic seed safe has only one key—around her neck.' }
           ]
         },
         fencer: {
@@ -206,29 +248,29 @@
           name: 'Vladislaus Stone',
           role: 'Fencing Master & Armory Warden',
           age: 50,
-          image: 'assets/images/suspect_professor.jpg',
+          image: 'assets/images/suspect_stone.svg',
           initialSuspicion: 50,
           currentSuspicion: 50,
           bio: 'A rigid martial instructor with an obsession with honor and dueling traditions. Regularly clashed with Weems over student safety regulations.',
           statedAlibi: 'Claims he was in the fencing salle oiling antique sabers between 4:30 PM and 5:30 PM.',
           interrogation: [
-            { id: 'stone_where', q: 'Where were you during afternoon tea?', a: 'Polishing French foils in the salle. An honorable blade demands constant oiling, not gossiping over teacups.', wednesdayThought: 'His fingers smell of mineral oil and steel shavings. No plant residue.' },
+            { id: 'stone_where', q: 'Where were you during afternoon tea?', a: 'Polishing French foils in the salle. An honorable blade demands constant oiling, not gossiping over teacups.', wednesdayThought: 'His fingers smell of mineral oil and steel shavings. Zero plant residue.' },
             { id: 'stone_chalice', q: 'Did you enter the bell tower tea room?', a: 'Never. I do not drink chamomile infusions. If I have a grievance with Weems, I challenge her in the quad, not with coward’s poison.', wednesdayThought: 'A swordsman’s pride is annoying, but it eliminates him from petty chemical assassinations.' }
           ]
         },
-        siren: {
-          id: 'siren',
-          name: 'Bianca Barclay',
-          role: 'Siren Prefect & Choral Lead',
-          age: 18,
-          image: 'assets/images/suspect_siren.jpg',
-          initialSuspicion: 55,
-          currentSuspicion: 55,
-          bio: 'The confident, razor-sharp Siren queen bee of Nevermore. Wears an enchanted siren pendant to restrain her hypnotic compulsion.',
-          statedAlibi: 'Claims she was by the weeping willows practicing vocal resonance for the autumn concert.',
+        werewolf: {
+          id: 'werewolf',
+          name: 'Enid Sinclair',
+          role: 'Werewolf Roommate & Gossip Columnist',
+          age: 16,
+          image: 'assets/images/suspect_enid.svg',
+          initialSuspicion: 35,
+          currentSuspicion: 35,
+          bio: 'Wednesday’s hyperactive, color-loving roommate. Runs Nevermore’s top gossip blog. Observant of every whisper in the hallways.',
+          statedAlibi: 'Was in the quad filming social dance videos with her friends from 4:15 PM until dinner.',
           interrogation: [
-            { id: 'bianca_where', q: 'Where were you during faculty tea?', a: 'Down by the lake doing vocal scales. Ask the swans if you don’t believe me, Addams.', wednesdayThought: 'Her boots are wet with lake mud, not greenhouse mulch.' },
-            { id: 'bianca_poison', q: 'Did you know the tea was poisoned?', a: 'Weems has strict rules, but I’m a Siren, not an alchemist. When I want someone out of my way, I use my voice, not nightshade.', wednesdayThought: 'Arrogant, but consistent. She has no access to Greenhouse 3 seed vaults.' }
+            { id: 'enid_where', q: 'Where were you when the tea chalice was dosed?', a: 'In the main courtyard filming TikTok dance transitions with Yoko! You can check my timestamped live stream, Wednesday!', wednesdayThought: 'Her live stream verifies her location continuously from 4:15 PM to 5:10 PM.' },
+            { id: 'enid_thornhill', q: 'Did you see Ms. Thornhill earlier?', a: 'Yes! I saw Ms. Thornhill scurrying up the bell tower stairs at 4:45 PM carrying a velvet pouch and looking super tense!', wednesdayThought: 'A critical eyewitness placement. Thornhill was ascending the bell tower right before tea.' }
           ]
         }
       },
@@ -251,7 +293,7 @@
         footprint: {
           id: 'clue_fracture',
           name: 'Resonant Acoustic Stone Fracture',
-          locationIn3D: { x: -3.6, y: 2.8, z: 2.0 },
+          locationIn3D: { x: -6.8, y: 6.5, z: -3.0 },
           image: 'assets/images/evidence_fracture.svg',
           category: 'Acoustic Forensics',
           tags: ['#SonicCleavage', '#NoChiselMarks', '#HighFrequency'],
@@ -261,12 +303,19 @@
             frequencyEstimate: '432 Hz modulated to 14,000 Hz harmonic',
             contradiction: 'Could only be produced by an acoustic Siren song amplified by metal.'
           },
+          uvRevelation: "Under 365nm UV excitation: High-stress micro-fracture patterns reveal nodal standing wave nodes matching human vocal chord acoustic nodes.",
+          reagentProfile: {
+            compound: "Piezoelectric Resonance Scanning",
+            reaction: "Acoustic micro-crystallography shows zero impact percussion; 100% standing frequency shearing",
+            confidence: "99.5% Physical Proof",
+            reactionColor: "#06b6d4"
+          },
           wednesdayNote: "Sound can break glass, crystal, and bone. In the hands of a trained Siren, stone is merely a slow-vibrating liquid."
         },
         letter: {
           id: 'clue_tuning',
           name: 'Silver Siren Acoustic Tuning Fork',
-          locationIn3D: { x: 3.5, y: 3.6, z: -0.5 },
+          locationIn3D: { x: 8.2, y: 3.5, z: 3.2 },
           image: 'assets/images/evidence_tuning_fork.svg',
           category: 'Acoustic Instrument',
           tags: ['#SirenSongFork', '#432Hz', '#SilverPendantCharm'],
@@ -276,12 +325,19 @@
             heraldry: 'Barclay Siren Choral crest',
             contradiction: 'Directly owned by Bianca Barclay for harmonic pitch training.'
           },
+          uvRevelation: "Under 365nm UV excitation: Sea-salt electrolyte residue on the handle confirms Siren biological touch.",
+          reagentProfile: {
+            compound: "Silver Nitrate Precipitation Reaction",
+            reaction: "Dense white curdy silver chloride precipitate confirming marine saltwater electrolyte perspiration",
+            confidence: "99.8% Siren Biological Match",
+            reactionColor: "#93c5fd"
+          },
           wednesdayNote: "A tuning fork engraved with your own crest. Narcissism is the downfall of so many promising villains."
         },
         register: {
           id: 'clue_scarf',
           name: 'Torn Blue Silk Siren Scarf',
-          locationIn3D: { x: -0.8, y: 4.2, z: -2.0 },
+          locationIn3D: { x: -0.5, y: 2.2, z: 7.5 },
           image: 'assets/images/evidence_siren_scarf.svg',
           category: 'Fabric Evidence',
           tags: ['#BlueSilk', '#ParapetSnag', '#NevermoreEmblem'],
@@ -291,6 +347,13 @@
             threadMaterial: 'Sea-silk extracted from Mediterranean mollusks',
             contradiction: 'Matches Bianca Barclay’s signature concert performance scarf.'
           },
+          uvRevelation: "Under 365nm UV excitation: Byssus mollusk sea-silk filaments fluoresce iridescent sapphire blue.",
+          reagentProfile: {
+            compound: "Protein Byssus Solubility Assay",
+            reaction: "Insoluble in dilute acids; characteristic of authentic Mediterranean Pinna nobilis sea-silk",
+            confidence: "99.9% Material Identification",
+            reactionColor: "#3b82f6"
+          },
           wednesdayNote: "Sea-silk is impervious to water, but exceedingly fragile when caught on 19th-century gothic limestone."
         }
       },
@@ -298,7 +361,7 @@
         siren: {
           id: 'siren',
           name: 'Bianca Barclay',
-          role: 'Siren Choral Mistress',
+          role: 'Siren Choral Mistress & Prefect',
           age: 18,
           image: 'assets/images/suspect_siren.jpg',
           initialSuspicion: 55,
@@ -311,32 +374,34 @@
             { id: 'bianca_confront_scarf', q: '[Confront: Scarf] Your sea-silk scarf was snagged on the gargoyle talon.', a: 'I... I was only testing if my song could crack the old wards! I didn’t know the whole gargoyle would shear off! It was an accident, Wednesday!', wednesdayThought: 'Full confession. Vanity pushed her song beyond the threshold of acoustic destruction.' }
           ]
         },
-        student: {
-          id: 'student',
-          name: 'Julian Crane',
-          role: 'Outcast Scholar',
+        gorgon: {
+          id: 'gorgon',
+          name: 'Ajax Petropolus',
+          role: 'Gorgon Sculptor & Stone Artisan',
           age: 17,
-          image: 'assets/images/suspect_student.jpg',
+          image: 'assets/images/suspect_ajax.svg',
           initialSuspicion: 40,
           currentSuspicion: 40,
-          bio: 'Nocturnal student who loves gargoyles and sketches them daily.',
-          statedAlibi: 'Was in the courtyard sketching the eclipse from below.',
+          bio: 'A laid-back Gorgon student who carves stone statues. Always wears a beanie to prevent accidentally petrifying classmates with his snake hair.',
+          statedAlibi: 'Was in the sculpture workshop chiseling clay models.',
           interrogation: [
-            { id: 'julian_gargoyle', q: 'Did you climb the belfry to push the gargoyle?', a: 'Push a two-ton stone statue with my bare arms? Have you looked at my physique? I was almost crushed by it when it hit the ground!', wednesdayThought: 'Physics clears him. He has neither the muscle nor the sonic frequency.' }
+            { id: 'ajax_where', q: 'Did you use your chisel on the belfry gargoyle?', a: 'Whoa, no way! I was down in the studio shaping clay gargoyles. Real stone takes days to chisel, and that break was totally smooth!', wednesdayThought: 'His hands are covered in wet terracotta clay, not sheared limestone powder.' },
+            { id: 'ajax_frequency', q: 'Could a Gorgon gaze shear stone in half?', a: 'Gorgons turn flesh into stone, Wednesday, we don’t make stone explode. That took crazy high-pitch sound waves!', wednesdayThought: 'Acoustic physics exonerates him completely.' }
           ]
         },
-        librarian: {
-          id: 'librarian',
-          name: 'Madam Thalia Vance',
-          role: 'Chief Archivist',
-          age: 54,
-          image: 'assets/images/suspect_librarian.jpg',
+        weems: {
+          id: 'weems',
+          name: 'Principal Larissa Weems',
+          role: 'Nevermore Headmistress & Shapeshifter',
+          age: 48,
+          image: 'assets/images/suspect_weems.svg',
           initialSuspicion: 35,
           currentSuspicion: 35,
-          bio: 'Keeper of records who warned the school about parapet maintenance.',
-          statedAlibi: 'Was filing astronomical manuscripts in the library basement.',
+          bio: 'The imposing headmistress of Nevermore Academy. Obsessed with protecting the school’s reputation from municipal crackdowns.',
+          statedAlibi: 'Was on a conference call with Jericho Mayor Walker in her office during the eclipse.',
           interrogation: [
-            { id: 'vance_belfry', q: 'Did you inspect the belfry masonry today?', a: 'The belfry has 180 stone steps. My knees do not permit recreational climbing. I filed a repair request three months ago that Weems ignored.', wednesdayThought: 'Her grievance is bureaucratic, not criminal.' }
+            { id: 'weems_where', q: 'Did you inspect the belfry masonry before the collapse?', a: 'I had an architectural engineer assess the tower two weeks ago. I certainly would not endanger students by climbing the parapet during an eclipse.', wednesdayThought: 'Her telephone log with Mayor Walker confirms her alibi at 1:10 PM.' },
+            { id: 'weems_gargoyle', q: 'Do you suspect a student was responsible?', a: 'If a student has weaponized their outcast abilities against the architecture, they will face immediate expulsion and tribunal sanction.', wednesdayThought: 'Her indignation is administrative, not guilty.' }
           ]
         }
       },
@@ -359,7 +424,7 @@
         footprint: {
           id: 'clue_dahlia',
           name: 'Scalpel-Trimmed Black Dahlia',
-          locationIn3D: { x: -3.6, y: 2.8, z: 2.0 },
+          locationIn3D: { x: -6.5, y: 5.8, z: -6.2 },
           image: 'assets/images/evidence_black_dahlia.svg',
           category: 'Botanical Clue',
           tags: ['#BlackDahlia', '#PaletteKnifeCut', '#LinseedOil'],
@@ -369,12 +434,19 @@
             chemicalResidue: 'Linseed oil and turpentine resin',
             contradiction: 'Matches the exact palette knife used by psychic painter Xavier Thorpe.'
           },
+          uvRevelation: "Under 365nm UV excitation: Linseed oil residue on the stem glows soft yellow-green, showing the beveled cut of a metal palette knife.",
+          reagentProfile: {
+            compound: "Gas Chromatography - Turpentine & Linseed Profile",
+            reaction: "Direct match to Rembrandt Artist Oils vehicle formulation",
+            confidence: "99.4% Studio Material Match",
+            reactionColor: "#10b981"
+          },
           wednesdayNote: "A black dahlia. A symbol of betrayal, mourning, and pretentious artistic flair."
         },
         letter: {
           id: 'clue_sketch',
           name: 'Prophetic Charcoal Sketch',
-          locationIn3D: { x: 3.5, y: 3.6, z: -0.5 },
+          locationIn3D: { x: 7.5, y: 2.8, z: 5.8 },
           image: 'assets/images/evidence_charcoal_sketch.svg',
           category: 'Prophetic Art',
           tags: ['#CharcoalSketch', '#CryptBreach', '#PsychicVision'],
@@ -384,12 +456,19 @@
             artistStyle: 'Hyper-realistic prophetic charcoal with Xavier Thorpe’s monogram',
             contradiction: 'Proves the artist foresaw the exact breach before it occurred.'
           },
+          uvRevelation: "Under 365nm UV excitation: Xavier's psychic signet watermark 'XT' glows under ultraviolet illumination.",
+          reagentProfile: {
+            compound: "Vine Charcoal & Fixative Micro-Spectrometry",
+            reaction: "Matches the exact batch of Winsor & Newton compressed charcoal in Xavier's studio",
+            confidence: "99.8% Hand Attribution",
+            reactionColor: "#a855f7"
+          },
           wednesdayNote: "Psychic visions are either a curse or a convenient excuse for burglary. I intend to prove the latter."
         },
         register: {
           id: 'clue_rag',
           name: 'Turpentine Paint Rag & Cemetery Mud',
-          locationIn3D: { x: -0.8, y: 4.2, z: -2.0 },
+          locationIn3D: { x: 6.8, y: 6.2, z: -4.5 },
           image: 'assets/images/evidence_paint_rag.svg',
           category: 'Chemical Residue',
           tags: ['#Turpentine', '#CemeterySoil', '#BurntUmberPigment'],
@@ -398,6 +477,13 @@
             timestamp: 'Deposited during the 2:00 AM break-in',
             chemicalTraces: 'Raw linseed oil, distilled turpentine, and red cemetery clay',
             contradiction: 'Directly matches the art supplies in Xavier’s shed studio.'
+          },
+          uvRevelation: "Under 365nm UV excitation: Fluorescing mineral hydrocarbons confirm cemetery clay mixed with distilled oil spirits.",
+          reagentProfile: {
+            compound: "Mineral Spirits Evaporation Chromatography",
+            reaction: "Pure distilled gum turpentine distillate matching artist-grade solvent",
+            confidence: "99.2% Chemical Match",
+            reactionColor: "#f59e0b"
           },
           wednesdayNote: "Artists claim paint is an expression of the soul. In this instance, it is an expression of careless forensic contamination."
         }
@@ -408,7 +494,7 @@
           name: 'Xavier Thorpe',
           role: 'Psychic Painter & Raven Artist',
           age: 18,
-          image: 'assets/images/suspect_student.jpg',
+          image: 'assets/images/suspect_xavier.svg',
           initialSuspicion: 60,
           currentSuspicion: 60,
           bio: 'A brooding psychic artist whose sketches can come alive. Prone to sleepwalking and vivid prophetic trances regarding the Addams lineage.',
@@ -419,32 +505,34 @@
             { id: 'xavier_confront_dahlia', q: '[Confront: Dahlia] The dahlia stem was beveled with your palette knife and linseed oil.', a: 'My palette knife... I woke up with dirt on my boots and my knife missing. If I took the skull, it was in my sleep! I would never desecrate Goody Addams deliberately!', wednesdayThought: 'Compelled by his living paintings. His subconscious guided him to the relic.' }
           ]
         },
-        botanist: {
-          id: 'botanist',
-          name: 'Marilyn Thornhill',
-          role: 'Conservatory Mistress',
-          age: 46,
-          image: 'assets/images/suspect_botanist.jpg',
-          initialSuspicion: 50,
-          currentSuspicion: 50,
-          bio: 'Cultivates black dahlias in Greenhouse 2.',
-          statedAlibi: 'Was asleep in her dorm cottage.',
+        rowan: {
+          id: 'rowan',
+          name: 'Rowan Laslow',
+          role: 'Telekinetic Outcast & Astrologer',
+          age: 17,
+          image: 'assets/images/suspect_rowan.svg',
+          initialSuspicion: 45,
+          currentSuspicion: 45,
+          bio: 'A reclusive telekinetic student terrified of centuries-old prophecies. Convinced that the Addams bloodline will bring destruction upon Nevermore.',
+          statedAlibi: 'Claims he was in the observatory taking astrological moon measurements.',
           interrogation: [
-            { id: 'thornhill_dahlia', q: 'Did you harvest a black dahlia for the crypt tonight?', a: 'My dahlias are strictly accounted for in the conservatory catalog! Why would I trudge through graveyard mud in the freezing night?', wednesdayThought: 'Her boots are completely dry and spotless.' }
+            { id: 'rowan_where', q: 'Were you lurking near the Crackstone Crypt?', a: 'No! I stay away from graves! The bad psychic energy gives me asthma attacks. I was in the tower reading star charts!', wednesdayThought: 'His inhaler is in his pocket, and his shoes have zero cemetery clay on the treads.' },
+            { id: 'rowan_goody', q: 'Did you want Goody Addams’ relic destroyed?', a: 'Goody Addams was a witch of doom! But I use telekinesis, not palette knives and paint rags! Look at Xavier—he paints crypts every single day!', wednesdayThought: 'Fearful, but forensically clean.' }
           ]
         },
-        professor: {
-          id: 'professor',
-          name: 'Dr. Arthur Graves',
-          role: 'Alchemy Professor',
-          age: 52,
-          image: 'assets/images/suspect_professor.jpg',
-          initialSuspicion: 40,
-          currentSuspicion: 40,
-          bio: 'Claims historical relics belong in vaults, not muddy crypts.',
-          statedAlibi: 'Was drafting exam papers.',
+        galpin: {
+          id: 'galpin',
+          name: 'Sheriff Donovan Galpin',
+          role: 'Jericho Town Sheriff',
+          age: 49,
+          image: 'assets/images/suspect_galpin.svg',
+          initialSuspicion: 35,
+          currentSuspicion: 35,
+          bio: 'The skeptical sheriff of Jericho. Believes Nevermore outcasts are the source of every criminal disturbance in the county.',
+          statedAlibi: 'Was at the Jericho police precinct filing evening patrol reports.',
           interrogation: [
-            { id: 'graves_crypt', q: 'Did you need Goody Addams’ relic for your research?', a: 'Goody Addams was an illiterate witch from 1690. Her skull possesses zero scientific value to an educated alchemist.', wednesdayThought: 'His arrogance rules him out. He views Goody’s relics as rustic garbage.' }
+            { id: 'galpin_where', q: 'Did your deputies patrol near the old cemetery at 2 AM?', a: 'Deputy Santiago drove the perimeter road at 1:30 AM. He reported nothing out of the ordinary until the academy alarm tripped.', wednesdayThought: 'Police dispatch logs confirm his presence at the precinct desk.' },
+            { id: 'galpin_skull', q: 'Did you take the silver relic skull into evidence?', a: 'We don’t steal bones from crypts, kid. That’s an outcast ritual, and I’m betting on one of your fellow freaks.', wednesdayThought: 'His contempt for outcast folklore is clear; he had no interest in occult relics.' }
           ]
         }
       },
@@ -467,23 +555,30 @@
         footprint: {
           id: 'clue_claw',
           name: 'Shredded Reinforced Glass & Beast Claws',
-          locationIn3D: { x: -3.6, y: 2.8, z: 2.0 },
+          locationIn3D: { x: -7.8, y: 2.2, z: 4.5 },
           image: 'assets/images/evidence_hyde_claws.svg',
           category: 'Physical Trauma',
           tags: ['#HydeClaws', '#CashmereFiber', '#ShatteredGlass'],
-          description: 'Shattered safety glass deeply gouged with monstrous three-inch claws. Caught in the jagged shards is a beige cashmere coat fiber and chemical powder.',
+          description: 'Shattered safety glass deeply gouged with monstrous three-inch claws floating in zero-gravity. Caught in the jagged shards is a beige cashmere coat fiber and chemical powder.',
           forensics: {
             timestamp: '3:15 AM exact alarm trigger',
             clawSpread: '14-inch monster palm span (Matches Hyde morphology)',
             fiberAnalysis: 'Fine Italian beige cashmere with lavender perfume residue',
             contradiction: 'Directly matches the bespoke wardrobe of Dr. Valerie Kinbott.'
           },
+          uvRevelation: "Under 365nm UV excitation: High-end Italian cashmere wool fibers fluoresce soft beige-violet with lavender linalool perfume droplets.",
+          reagentProfile: {
+            compound: "Keratin Fiber Micro-Spectroscopy & GC-MS Fragrance Profile",
+            reaction: "Matches Dr. Kinbott's bespoke Italian overcoat and Yardley English Lavender eau de toilette",
+            confidence: "99.7% Fiber Match",
+            reactionColor: "#fbbf24"
+          },
           wednesdayNote: "Monsters do not wear Italian cashmere. Which means the monster was accompanied by a master."
         },
         letter: {
           id: 'clue_sedative',
           name: 'Shattered Hydral-4 Ampoule',
-          locationIn3D: { x: 3.5, y: 3.6, z: -0.5 },
+          locationIn3D: { x: 7.6, y: 6.5, z: -4.2 },
           image: 'assets/images/evidence_sedative_vial.svg',
           category: 'Chemical Stimulant',
           tags: ['#Hydral4', '#HypnoticChemical', '#AlkaloidCocktail'],
@@ -493,20 +588,34 @@
             prescriptionAuthority: 'Authorized under psychological clinical trials by Dr. Kinbott',
             contradiction: 'Could only be unlocked with the psychological clinic master code.'
           },
+          uvRevelation: "Under 365nm UV excitation: Neuro-chemical stimulant residue glows bright fluorescent amber along the fractured ampoule neck.",
+          reagentProfile: {
+            compound: "Marquis Reagent Alkaloid Assay",
+            reaction: "Vibrant yellow-orange turning deep red confirmation of synthesized Hydral-4 transformation chemical",
+            confidence: "99.9% Chemical Verification",
+            reactionColor: "#f97316"
+          },
           wednesdayNote: "A sedative formulated to awaken nightmares instead of soothing them. Medical malpractice at its finest."
         },
         register: {
           id: 'clue_tape',
           name: 'Hypnotherapy Dictaphone Cassette',
-          locationIn3D: { x: -0.8, y: 4.2, z: -2.0 },
+          locationIn3D: { x: 0.0, y: 4.8, z: -7.8 },
           image: 'assets/images/evidence_cassette_tape.svg',
           category: 'Audio Record',
           tags: ['#HypnosisTape', '#Dictaphone', '#TriggerWords'],
-          description: 'A micro-cassette tape recovered from the clinic floor. Under analysis, a soft female voice repeats hypnotic trigger phrases: "When the moon crests, the beast obeys. Awaken, my pet."',
+          description: 'A micro-cassette tape recovered from the clinic floor floating in the void. Under analysis, a soft female voice repeats hypnotic trigger phrases: "When the moon crests, the beast obeys. Awaken, my pet."',
           forensics: {
             timestamp: 'Recorded yesterday evening in the therapy office',
             voiceSpectrogram: 'Exact vocal match to Dr. Valerie Kinbott',
             contradiction: 'Proves the therapist was using hypnosis to trigger and command the Hyde.'
+          },
+          uvRevelation: "Under 365nm UV excitation: Fingerprints in golden fountain pen ink on the cassette casing match Dr. Kinbott's clinical pen.",
+          reagentProfile: {
+            compound: "Voice Spectrogram Harmonic Analysis",
+            reaction: "F1/F2 vocal formant frequency resonance perfectly matches Dr. Kinbott's clinical voice pattern",
+            confidence: "100% Biometric Audio Identification",
+            reactionColor: "#ec4899"
           },
           wednesdayNote: "Never trust a therapist who takes notes with a gold fountain pen and records bedtime stories for predators."
         }
@@ -517,7 +626,7 @@
           name: 'Dr. Valerie Kinbott',
           role: 'Academy Psychoanalyst',
           age: 44,
-          image: 'assets/images/suspect_librarian.jpg',
+          image: 'assets/images/suspect_kinbott.svg',
           initialSuspicion: 50,
           currentSuspicion: 50,
           bio: 'The polished, soft-spoken therapist of Nevermore students. Specializes in behavioral hypnotherapy and wears elegant beige cashmere coats.',
@@ -528,32 +637,34 @@
             { id: 'kinbott_confront_tape', q: '[Confront: Tape] We listened to your dictaphone tape repeating hypnotic commands: "Awaken, my pet."', a: 'You had no right to listen to confidential therapy sessions! That was... an experimental desensitization protocol!', wednesdayThought: 'Her calm psychological facade crumbles. The hypnotist has been unmasked as the master of the beast.' }
           ]
         },
-        student: {
-          id: 'student',
-          name: 'Julian Crane',
-          role: 'Nocturnal Student',
-          age: 17,
-          image: 'assets/images/suspect_student.jpg',
+        tyler: {
+          id: 'tyler',
+          name: 'Tyler Galpin',
+          role: 'Jericho Barista & Forest Drifter',
+          age: 18,
+          image: 'assets/images/suspect_tyler.svg',
           initialSuspicion: 55,
           currentSuspicion: 55,
-          bio: 'Seen pacing near the clinic earlier in the evening.',
-          statedAlibi: 'Was getting sleeping pills from the dispensary nurse earlier at 8 PM.',
+          bio: 'A seemingly unassuming barista at the Weathervane Cafe. Subject to strange memory blackouts and unexplainable night terrors.',
+          statedAlibi: 'Claims he was closing up the cafe and cleaning espresso machines until 11 PM, then fell asleep with missing hours.',
           interrogation: [
-            { id: 'julian_hyde', q: 'Did you smash the dispensary glass?', a: 'Look at my fingernails, Wednesday! I bite them down to the quick. I couldn’t scratch wet paper, let alone tempered bulletproof glass!', wednesdayThought: 'Physical truth. His hands are incapable of leaving 3-inch claw gouges.' }
+            { id: 'tyler_where', q: 'Where were you between 2:00 AM and 4:00 AM?', a: 'I... I woke up in the woods behind the cafe with mud on my hands. I’ve been having these blackouts, Wednesday. I swear I don’t know what happens to me.', wednesdayThought: 'His fear is authentic. He is a puppet being triggered without conscious recollection.' },
+            { id: 'tyler_kinbott', q: 'What does Dr. Kinbott do during your hypnotherapy sessions?', a: 'She uses this gold pocket watch and plays recordings of soft music. Then everything goes black until the next morning.', wednesdayThought: 'He confirms Kinbott’s hypnotic conditioning. The beast has a puppet master.' }
           ]
         },
-        professor: {
-          id: 'professor',
-          name: 'Dr. Arthur Graves',
-          role: 'Alchemy Professor',
-          age: 52,
-          image: 'assets/images/suspect_professor.jpg',
-          initialSuspicion: 40,
-          currentSuspicion: 40,
-          bio: 'Claims modern pharmacology is an insult to classic alchemy.',
-          statedAlibi: 'Was in his laboratory.',
+        walker: {
+          id: 'walker',
+          name: 'Mayor Noble Walker',
+          role: 'Jericho Mayor & Town Historian',
+          age: 62,
+          image: 'assets/images/suspect_walker.svg',
+          initialSuspicion: 35,
+          currentSuspicion: 35,
+          bio: 'The long-standing mayor of Jericho and proprietor of Pilgrim World. Desperate to keep the town’s tourism thriving despite gruesome monster sightings.',
+          statedAlibi: 'Was attending a town council budget meeting until midnight, then stayed at his mayoral manor.',
           interrogation: [
-            { id: 'graves_hydral', q: 'Did you formulate Hydral-4 for the monster?', a: 'Hydral-4 is synthetic corporate drivel from a pharmaceutical lab. I work only with pure nightshade and mandrake roots!', wednesdayThought: 'His arrogance confirms his innocence on synthetic pharmaceuticals.' }
+            { id: 'walker_where', q: 'Did you know Hydral-4 was being tested on Nevermore outcasts?', a: 'Nevermore’s internal medical affairs are confidential. As mayor, my priority is keeping panic off the streets of Jericho.', wednesdayThought: 'He is obsessed with municipal image, but lacks medical or chemical knowledge.' },
+            { id: 'walker_beast', q: 'Do you believe a monster is stalking the woods?', a: 'Bear attacks, Wednesday. Wild bears from the mountains. Let the authorities handle it without student melodrama.', wednesdayThought: 'Willful political denial. He is blind to the dark conspiracy operating in his town.' }
           ]
         }
       },
@@ -852,6 +963,7 @@
   let gameState = {
     currentView: 'landing',
     activeCaseId: 'CASE_001',
+    unlockedCases: ['CASE_001'],
     score: 100,
     caseProgress: {
       CASE_001: { cluesFound: { footprint: false, letter: false, register: false }, solved: false },
@@ -865,6 +977,9 @@
     userNotes: '',
     selectedSuspect: 'librarian',
     selectedClueForInspection: null,
+    activeClueFilter: 'all',
+    uvModes: {},
+    reagentActive: {},
     startTime: Date.now()
   };
 
@@ -874,8 +989,15 @@
       if (saved) {
         const parsed = JSON.parse(saved);
         gameState = Object.assign(gameState, parsed);
+        if (!gameState.unlockedCases || !Array.isArray(gameState.unlockedCases) || gameState.unlockedCases.length === 0) {
+          gameState.unlockedCases = ['CASE_001'];
+        }
         if (parsed.activeCaseId && ALL_CASES[parsed.activeCaseId]) {
-          currentCaseId = parsed.activeCaseId;
+          if (gameState.unlockedCases.includes(parsed.activeCaseId)) {
+            currentCaseId = parsed.activeCaseId;
+          } else {
+            currentCaseId = gameState.unlockedCases[0] || 'CASE_001';
+          }
           CASE_DATA = ALL_CASES[currentCaseId];
         }
       }
@@ -930,15 +1052,28 @@
     const navBadge = document.getElementById('nav-clue-badge');
     if (navBadge) navBadge.textContent = `${gameState.cluesCollectedCount}/3`;
 
-    // Update Case Pills in Landing and Case Bar
+    // Update Case Pills with Locked / Solved / Active states
     document.querySelectorAll('.case-pill').forEach(pill => {
       const cId = pill.dataset.case;
-      pill.classList.toggle('active', cId === currentCaseId);
+      const isUnlocked = gameState.unlockedCases && gameState.unlockedCases.includes(cId);
       const isSolved = gameState.caseProgress[cId] && gameState.caseProgress[cId].solved;
+      const isActive = (cId === currentCaseId);
+
+      pill.classList.toggle('active', isActive);
       pill.classList.toggle('solved', isSolved);
+      pill.classList.toggle('locked', !isUnlocked);
+
       const badge = pill.querySelector('.case-status-badge');
       if (badge) {
-        badge.textContent = isSolved ? 'SOLVED' : (cId === currentCaseId ? 'ACTIVE' : 'UNSOLVED');
+        if (!isUnlocked) {
+          badge.textContent = '🔒 LOCKED';
+        } else if (isSolved) {
+          badge.textContent = '✓ SOLVED';
+        } else if (isActive) {
+          badge.textContent = 'ACTIVE';
+        } else {
+          badge.textContent = 'UNSOLVED';
+        }
       }
     });
   }
@@ -970,6 +1105,20 @@
     setTimeout(dismiss, 1800);
   }
 
+  // Security Lockout Modal for Locked Cases
+  function showSecurityLockoutModal(caseId, customMsg) {
+    const overlay = document.getElementById('lockout-modal-overlay');
+    const titleEl = document.getElementById('lockout-modal-title');
+    const descEl = document.getElementById('lockout-modal-desc');
+    if (!overlay) return;
+
+    if (titleEl) titleEl.textContent = `CLASSIFIED TRIBUNAL FILE // ${caseId}`;
+    if (descEl) {
+      descEl.textContent = customMsg || `This case file is under Nevermore High Inquisitor seal. You must formally solve the prior case at the Tribunal before unlocking this record.`;
+    }
+    overlay.classList.add('active');
+  }
+
   // Randomized Spooky Lightning Flashes
   function triggerLightning() {
     const flashEl = document.getElementById('lightning-flash');
@@ -991,20 +1140,30 @@
   }, 16000);
 
   // ==========================================================================
-  // 5. CASE SELECTOR & SWITCHING LOGIC
+  // 5. CASE SELECTOR & SWITCHING LOGIC (WITH LINEAR UNLOCK ENFORCEMENT)
   // ==========================================================================
 
-  function switchCase(caseId) {
-    if (!ALL_CASES[caseId]) return;
+  function switchCase(caseId, bypassLock = false) {
+    if (!ALL_CASES[caseId]) return false;
+
+    // Linear progression check: cannot access until prior case is completed
+    const isUnlocked = gameState.unlockedCases && gameState.unlockedCases.includes(caseId);
+    if (!bypassLock && !isUnlocked) {
+      audio.playVerdictFail();
+      const caseNum = parseInt(caseId.slice(-1), 10);
+      const prevCaseNum = Math.max(1, caseNum - 1);
+      showSecurityLockoutModal(
+        caseId,
+        `TRIBUNAL SECURITY LOCK: Case ${caseId.slice(-3)} is sealed under Outcast Judiciary Ward. You must formally solve Case 00${prevCaseNum} at the Tribunal of Shadows before accessing these classified records.`
+      );
+      return false;
+    }
+
     audio.playClick();
     currentCaseId = caseId;
     CASE_DATA = ALL_CASES[currentCaseId];
 
-    // Update landing description
-    const descEl = document.getElementById('landing-case-desc');
-    if (descEl) descEl.innerHTML = `<strong>${CASE_DATA.title}:</strong> ${CASE_DATA.description}`;
-
-    // Reset suspect selection for the new case
+    // Reset suspect selection for the active case
     const firstSuspectKey = Object.keys(CASE_DATA.suspects)[0];
     gameState.selectedSuspect = firstSuspectKey;
 
@@ -1018,9 +1177,9 @@
     renderPinboard();
     renderSuspectView(firstSuspectKey);
     renderVerdictOptions();
-    renderCasesShowcase();
 
-    showFloatingNotification(`Switched to: ${CASE_DATA.title}`);
+    showFloatingNotification(`Active File: ${CASE_DATA.title}`);
+    return true;
   }
 
   // ==========================================================================
@@ -1322,11 +1481,10 @@
 
       const loader = new THREE.TextureLoader();
 
-      // Floating Positions in zero gravity among the books
-      const clueCoords = {
-        footprint: { x: -3.4, y: 2.8, z: 1.8, ringColor: 0xa855f7 },
-        letter: { x: 3.2, y: 3.5, z: -0.6, ringColor: 0xf59e0b },
-        register: { x: -0.6, y: 4.0, z: -1.9, ringColor: 0x38bdf8 }
+      const ringColors = {
+        footprint: 0xa855f7,
+        letter: 0xf59e0b,
+        register: 0x38bdf8
       };
 
       const clueKeys = ['footprint', 'letter', 'register'];
@@ -1335,15 +1493,17 @@
         const clueData = CASE_DATA.clues[key];
         if (!clueData) return;
 
-        const coords = clueCoords[key];
+        // Spread-out void space coordinates (widely separated across different quadrants)
+        const coords = clueData.locationIn3D || { x: -7.0, y: 3.0, z: 4.0 };
+        const ringColor = ringColors[key] || 0xc084fc;
         const clueGroup = new THREE.Group();
         clueGroup.name = clueData.id;
         clueGroup.userData = { clueKey: key, name: clueData.name };
 
         // 1. Arcane Rotating Halo Ring around floating clue
-        const ringGeo = new THREE.TorusGeometry(0.65, 0.022, 12, 36);
+        const ringGeo = new THREE.TorusGeometry(0.72, 0.024, 12, 36);
         const ringMat = new THREE.MeshBasicMaterial({
-          color: coords.ringColor,
+          color: ringColor,
           transparent: true,
           opacity: 0.85,
           blending: THREE.AdditiveBlending
@@ -1612,22 +1772,29 @@
 
   function collectCurrentClue() {
     const clueKey = gameState.selectedClueForInspection;
-    if (!clueKey || gameState.caseProgress[currentCaseId].cluesFound[clueKey]) return;
+    if (!clueKey) return;
 
-    gameState.caseProgress[currentCaseId].cluesFound[clueKey] = true;
-    gameState.score += 100;
-    audio.playSuccessChime();
-    saveGameState();
-
-    const collectBtn = document.getElementById('btn-modal-collect');
-    if (collectBtn) {
-      collectBtn.innerHTML = '<span>✓</span> Clue Collected In Notebook';
-      collectBtn.style.background = 'rgba(16, 185, 129, 0.4)';
-      collectBtn.style.borderColor = '#10B981';
-      collectBtn.disabled = true;
+    const wasCollected = gameState.caseProgress[currentCaseId].cluesFound[clueKey];
+    if (!wasCollected) {
+      gameState.caseProgress[currentCaseId].cluesFound[clueKey] = true;
+      gameState.score += 100;
+      audio.playSuccessChime();
+      saveGameState();
     }
 
-    showFloatingNotification(`Collected: ${CASE_DATA.clues[clueKey].name}`);
+    // Auto-dismiss the evidence modal
+    const modal = document.getElementById('evidence-modal');
+    if (modal) modal.classList.remove('active');
+
+    // Return to the 3D Void Library
+    switchView('room');
+
+    showFloatingNotification(`EVIDENCE SECURED // Void Library Awaits (${gameState.cluesCollectedCount}/3 Clues Found)`);
+
+    // Refocus 3D camera to void overview to allow finding remaining clues
+    if (threeApp) {
+      threeApp.focusCameraOn(0, 2.5, 0);
+    }
   }
 
   function showFloatingNotification(msg) {
@@ -1661,20 +1828,80 @@
   }
 
   // ==========================================================================
-  // 8. EVIDENCE NOTEBOOK & CONSPIRACY PINBOARD
+  // 8. INTERACTIVE EVIDENCE NOTEBOOK & CRIME LAB WORKBENCH
   // ==========================================================================
+
+  function toggleUVMode(key) {
+    audio.playClick();
+    gameState.uvModes[key] = !gameState.uvModes[key];
+    renderEvidenceCards();
+    showFloatingNotification(gameState.uvModes[key] ? '🔬 365nm UV Blacklight Scanner Active' : 'Normal Spectrum Restored');
+  }
+
+  function runReagentTest(key) {
+    audio.playClick();
+    gameState.reagentActive[key] = true;
+    renderEvidenceCards();
+    showFloatingNotification('🧪 Chemical Reagent Drop Test Complete');
+  }
+
+  function filterClues(filter) {
+    audio.playClick();
+    gameState.activeClueFilter = filter;
+    document.querySelectorAll('.lab-filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === filter);
+    });
+    renderEvidenceCards();
+  }
+
+  function pinClueDirectly(key) {
+    audio.playClick();
+    selectedPinClue = key;
+    // Switch to Pinboard Tab
+    const tabClues = document.getElementById('tab-btn-clues');
+    const tabPinboard = document.getElementById('tab-btn-pinboard');
+    if (tabClues && tabPinboard) {
+      tabPinboard.classList.add('active');
+      tabClues.classList.remove('active');
+      document.getElementById('evidence-tab-clues').style.display = 'none';
+      document.getElementById('evidence-tab-pinboard').style.display = 'block';
+    }
+    renderPinboard();
+    showFloatingNotification(`Pinned to Board: ${CASE_DATA.clues[key].name} — Now select a Suspect to wire`);
+  }
+
+  function locateClueIn3D(key) {
+    audio.playClick();
+    const clue = CASE_DATA.clues[key];
+    if (!clue || !clue.locationIn3D) return;
+    switchView('room');
+    if (threeApp) {
+      threeApp.focusCameraOn(clue.locationIn3D.x, clue.locationIn3D.y, clue.locationIn3D.z);
+    }
+    showFloatingNotification(`Void Camera focused on: ${clue.name}`);
+  }
 
   function renderEvidenceCards() {
     const grid = document.getElementById('clues-cards-grid');
     if (!grid) return;
     grid.innerHTML = '';
 
+    const filter = gameState.activeClueFilter || 'all';
+
     Object.keys(CASE_DATA.clues).forEach(key => {
       const clue = CASE_DATA.clues[key];
       const isFound = gameState.caseProgress[currentCaseId].cluesFound[key];
 
+      // Filter check
+      if (filter === 'chemical' && !clue.category.toLowerCase().includes('chemical') && !clue.category.toLowerCase().includes('toxin')) return;
+      if (filter === 'physical' && !clue.category.toLowerCase().includes('physical') && !clue.category.toLowerCase().includes('impression') && !clue.category.toLowerCase().includes('acoustic')) return;
+      if (filter === 'document' && !clue.category.toLowerCase().includes('document') && !clue.category.toLowerCase().includes('record') && !clue.category.toLowerCase().includes('correspondence') && !clue.category.toLowerCase().includes('art')) return;
+
+      const isUV = !!gameState.uvModes[key];
+      const isReagent = !!gameState.reagentActive[key];
+
       const card = document.createElement('div');
-      card.className = 'clue-card reveal-on-scroll';
+      card.className = `clue-card reveal-on-scroll ${isUV ? 'uv-mode' : ''} ${isReagent ? 'reagent-active' : ''}`;
       card.innerHTML = `
         <div class="clue-card-header">
           <img src="${clue.image}" alt="${clue.name}" class="clue-card-img" style="filter: ${isFound ? 'none' : 'grayscale(100%) brightness(0.4)'}">
@@ -1683,19 +1910,71 @@
             <span>${isFound ? '✓' : '🔒'}</span> ${isFound ? 'Secured in Dossier' : 'Undiscovered in Void'}
           </div>
         </div>
+
         <div class="clue-card-body">
           <span class="clue-id">${clue.id.toUpperCase()}</span>
           <h3 class="clue-title">${clue.name}</h3>
-          <p class="clue-desc">${isFound ? clue.description : 'Physical evidence waiting to be inspected in the 3D Void Library.'}</p>
+          <p class="clue-desc">${isFound ? clue.description : 'Physical evidence drifting in the zero-gravity void. Enter the 3D Void Library to discover and inspect it.'}</p>
+          
           <div class="clue-tags">
             ${clue.tags.map(t => `<span class="clue-tag">${t}</span>`).join('')}
           </div>
+
+          <!-- Alibi Contradiction Analysis (How this clue breaks suspect alibis) -->
+          <div class="clue-contradiction-box">
+            <div class="contradiction-header">
+              <span>⚖️</span> LEGAL CONTRADICTION & ALIBI DISMANTLER:
+            </div>
+            <div class="contradiction-body">
+              ${clue.forensics.contradiction}
+            </div>
+          </div>
+
+          <!-- UV Blacklight Revelation Overlay -->
+          <div class="clue-uv-scanner-overlay">
+            <div class="uv-badge-header">
+              <span>🔬 365nm Wood's Lamp Fluoroscopy</span>
+              <span style="color: #c084fc;">ACTIVE UV</span>
+            </div>
+            <div class="uv-revelation-text">
+              ${clue.uvRevelation || 'Ultraviolet excitation reveals invisible spectral halogens, latent sebum friction ridges, and luminescent chemical residue.'}
+            </div>
+          </div>
+
+          <!-- Chemical Reagent Drop Test Panel -->
+          <div class="clue-reagent-panel">
+            <div class="reagent-header">
+              <span>🧪 Reagent Assay: ${clue.reagentProfile ? clue.reagentProfile.compound : 'Acidic Reduction'}</span>
+              <span style="color: #10b981;">✓ ${clue.reagentProfile ? clue.reagentProfile.confidence : '99.5% Confirmed'}</span>
+            </div>
+            <div class="reagent-reaction-text">
+              ${clue.reagentProfile ? clue.reagentProfile.reaction : 'Precipitation confirms signature chemical match.'}
+            </div>
+          </div>
+
           ${isFound ? `<div class="clue-quote">"${clue.wednesdayNote}"</div>` : ''}
-          <div class="clue-card-actions">
-            <button class="btn-card-action" onclick="window.WEDNESDAY_APP.inspectClue('${key}')">
-              <span>🔍</span> Forensic View
+
+          <!-- Interactive Crime Lab Tools Grid -->
+          <div class="clue-tools-grid">
+            <button class="btn-tool-action ${isUV ? 'active-tool' : ''}" onclick="window.WEDNESDAY_APP.toggleUV('${key}')" title="Scan with 365nm UV Blacklight">
+              <span>🔬</span> ${isUV ? 'Normal Light' : 'UV Blacklight'}
             </button>
-            <button class="btn-card-action" onclick="window.WEDNESDAY_APP.askThingAbout('${key}')">
+            <button class="btn-tool-action ${isReagent ? 'active-tool' : ''}" onclick="window.WEDNESDAY_APP.runReagent('${key}')" title="Run chemical reagent drop test">
+              <span>🧪</span> ${isReagent ? 'Tested ✓' : 'Reagent Test'}
+            </button>
+            <button class="btn-tool-action" onclick="window.WEDNESDAY_APP.pinClueDirectly('${key}')" title="Connect to Suspect on Pinboard">
+              <span>📌</span> Pin to Board
+            </button>
+            <button class="btn-tool-action" onclick="window.WEDNESDAY_APP.locateIn3D('${key}')" title="Locate floating clue in 3D void">
+              <span>🌌</span> Void Orbit
+            </button>
+          </div>
+
+          <div style="margin-top: 0.6rem; display: flex; gap: 0.5rem;">
+            <button class="btn-card-action" style="flex: 1;" onclick="window.WEDNESDAY_APP.inspectClue('${key}')">
+              <span>🔍</span> Forensic Zoom
+            </button>
+            <button class="btn-card-action" style="flex: 1;" onclick="window.WEDNESDAY_APP.askThingAbout('${key}')">
               <span>✋</span> Consult Thing
             </button>
           </div>
@@ -2086,6 +2365,20 @@
       audio.playVerdictSuccess();
       gameState.caseProgress[currentCaseId].solved = true;
       gameState.score += 450;
+
+      // Unlock next chronological case
+      const currentCaseNumber = parseInt(currentCaseId.slice(-1), 10);
+      const nextCaseNumber = currentCaseNumber + 1;
+      const nextCaseId = `CASE_00${nextCaseNumber}`;
+      let hasNextCase = false;
+
+      if (ALL_CASES[nextCaseId]) {
+        if (!gameState.unlockedCases.includes(nextCaseId)) {
+          gameState.unlockedCases.push(nextCaseId);
+        }
+        hasNextCase = true;
+      }
+
       saveGameState();
 
       launchVictoryParticles();
@@ -2096,15 +2389,37 @@
       document.getElementById('score-clues').textContent = `${gameState.cluesCollectedCount}/3`;
       document.getElementById('score-rank').textContent = gameState.score >= 900 ? "HIGH INQUISITOR" : "MASTER SLEUTH";
 
-      // Populate solution breakdown for this case
+      // Solution breakdown & Next Case Button
       const sol = CASE_DATA.solution;
       const bContainer = document.querySelector('.result-solution-breakdown');
       if (bContainer) {
         bContainer.innerHTML = `
           <div class="solution-step-item">
-            <h5>CASE CLOSED: ${CASE_DATA.title.toUpperCase()}</h5>
+            <h5>CASE CLOSED // ${CASE_DATA.title.toUpperCase()}</h5>
             <p>${sol.explanation}</p>
           </div>
+          ${hasNextCase ? `
+            <div style="margin-top: 1.5rem; padding: 1.2rem; background: rgba(139, 92, 246, 0.12); border: 1px solid var(--purple-primary); border-radius: 8px; text-align: center;">
+              <h4 style="color: var(--accent-gold); font-family: var(--font-serif); margin-bottom: 0.4rem;">
+                🔓 CASE 00${nextCaseNumber} UNLOCKED: ${ALL_CASES[nextCaseId].title.toUpperCase()}
+              </h4>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.2rem;">
+                Click below to archive completed case, reset forensic evidence slate, and begin investigating the new crime scene.
+              </p>
+              <button class="btn-primary" style="padding: 0.85rem 2rem; font-size: 0.95rem; font-weight: bold;" onclick="window.WEDNESDAY_APP.proceedToNextCase('${nextCaseId}')">
+                <span>🗝️</span> Proceed to Case 00${nextCaseNumber} (Reset Evidence Slate)
+              </button>
+            </div>
+          ` : `
+            <div style="margin-top: 1.5rem; padding: 1.2rem; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 8px; text-align: center;">
+              <h4 style="color: #10b981; font-family: var(--font-serif); margin-bottom: 0.4rem;">
+                🏆 ALL 5 NEVERMORE MYSTERIES SOLVED!
+              </h4>
+              <p style="color: var(--text-white); font-size: 0.85rem;">
+                You have demonstrated ruthless Addams-grade intellect across all five cases. Wednesday Addams approves.
+              </p>
+            </div>
+          `}
         `;
       }
 
@@ -2126,6 +2441,35 @@
         failPanel.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  }
+
+  function proceedToNextCase(nextCaseId) {
+    audio.playClick();
+    if (!ALL_CASES[nextCaseId]) return;
+
+    // 1. Reset all collected evidences & state for the new case (clean slate)
+    gameState.cluesCollectedCount = 0;
+    gameState.pinboardConnections = [];
+    gameState.userNotes = `[CRIME NOTES // ${ALL_CASES[nextCaseId].title}]\nScene: ${ALL_CASES[nextCaseId].location}\nStolen: ${ALL_CASES[nextCaseId].itemStolen}\n`;
+    gameState.uvModes = {};
+    gameState.reagentActive = {};
+
+    // Ensure the new case has fresh clues
+    if (gameState.caseProgress[nextCaseId]) {
+      gameState.caseProgress[nextCaseId].cluesFound = { footprint: false, letter: false, register: false };
+    }
+
+    // 2. Switch to the next case (with bypassLock since unlocked)
+    switchCase(nextCaseId, true);
+
+    // 3. Dismiss verdict panels
+    const successPanel = document.getElementById('verdict-result-success');
+    if (successPanel) successPanel.classList.remove('active');
+
+    // 4. Return directly to 3D library
+    switchView('room');
+
+    showFloatingNotification(`Evidence Slate Cleared • Entered ${ALL_CASES[nextCaseId].title}`);
   }
 
   // ==========================================================================
@@ -2492,7 +2836,13 @@
     document.querySelectorAll('.modal-close-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         audio.playClick();
-        btn.closest('.modal-overlay').classList.remove('active');
+        const modal = btn.closest('.modal-overlay');
+        if (modal) {
+          modal.classList.remove('active');
+          if (modal.id === 'evidence-modal' && gameState.currentView === 'room' && threeApp) {
+            threeApp.focusCameraOn(0, 2.5, 0);
+          }
+        }
       });
     });
 
@@ -2578,16 +2928,18 @@
     updateHUDStats();
     initScrollSystem();
     renderVerdictOptions();
-    renderCasesShowcase();
+    renderEvidenceCards();
+    renderSuspectView(gameState.selectedSuspect || Object.keys(CASE_DATA.suspects)[0]);
   });
 
   // Global hooks
   window.WEDNESDAY_APP = {
     switchView,
     switchCase,
+    proceedToNextCase: (nextCaseId) => proceedToNextCase(nextCaseId),
     activateAndInvestigate: (caseId) => {
-      switchCase(caseId);
-      switchView('room');
+      const allowed = switchCase(caseId);
+      if (allowed !== false) switchView('room');
     },
     inspectClue: (key) => openEvidenceModal(key),
     inspectClueFromCase: (caseId, key) => {
@@ -2598,6 +2950,11 @@
       switchView('assistant');
       sendThingMessage(`Can you analyze the ${CASE_DATA.clues[key].name}?`);
     },
+    toggleUV: (key) => toggleUVMode(key),
+    runReagent: (key) => runReagentTest(key),
+    filterClues: (filter) => filterClues(filter),
+    pinClueDirectly: (key) => pinClueDirectly(key),
+    locateIn3D: (key) => locateClueIn3D(key),
     selectSuspect: (key) => renderSuspectView(key),
     selectVerdictSuspect,
     toggleVerdictEvidence,
@@ -2613,7 +2970,7 @@
     resetGame,
     scrollDownToOverview,
     scrollToIndex,
-    scrollToCases,
+    scrollToCases: () => switchView('evidence'),
     scrollToRules,
     scrollToCrypt
   };

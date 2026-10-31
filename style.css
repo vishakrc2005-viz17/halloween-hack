@@ -3414,3 +3414,327 @@ main {
   box-shadow: var(--shadow-glass);
 }
 
+/* Locked Case Styling */
+.case-pill.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(15, 10, 18, 0.6);
+}
+
+.case-pill.locked:hover {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+}
+
+.case-pill.locked .case-status-badge {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* ==========================================================================
+   FORENSIC LAB & INTERACTIVE CRIME DOSSIER WORKBENCH
+   ========================================================================== */
+.forensic-lab-header {
+  background: rgba(18, 14, 28, 0.85);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.lab-status-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lab-flask-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px var(--purple-glow));
+  animation: flask-bubble 2.5s infinite ease-in-out;
+}
+
+@keyframes flask-bubble {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+.lab-title-text h4 {
+  font-family: var(--font-serif-display);
+  font-size: 1.15rem;
+  color: var(--text-white);
+  letter-spacing: 1px;
+}
+
+.lab-title-text p {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent-lavender);
+}
+
+.lab-filter-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.lab-filter-btn {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.lab-filter-btn:hover, .lab-filter-btn.active {
+  background: var(--purple-primary);
+  color: #fff;
+  border-color: var(--accent-lavender);
+}
+
+/* Clue Card Interactive Workbench */
+.clue-card {
+  position: relative;
+  background: rgba(16, 12, 24, 0.95);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.clue-card:hover {
+  border-color: var(--purple-primary);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.25);
+}
+
+/* UV Blacklight Mode Filter */
+.clue-card.uv-mode .clue-card-img {
+  filter: invert(0.9) hue-rotate(190deg) contrast(1.4) drop-shadow(0 0 20px #8b5cf6) !important;
+  transition: filter 0.4s ease;
+}
+
+.clue-uv-scanner-overlay {
+  display: none;
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.92), rgba(30, 10, 60, 0.96));
+  border: 1px solid #c084fc;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-top: 0.75rem;
+  animation: uvGlowPulse 2s infinite alternate;
+}
+
+.clue-card.uv-mode .clue-uv-scanner-overlay {
+  display: block;
+}
+
+@keyframes uvGlowPulse {
+  0% { box-shadow: 0 0 10px rgba(192, 132, 252, 0.3); }
+  100% { box-shadow: 0 0 25px rgba(192, 132, 252, 0.7); }
+}
+
+.uv-badge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #f3e8ff;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.uv-revelation-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #e9d5ff;
+  line-height: 1.45;
+}
+
+/* Chemical Reagent Drop Test Result Panel */
+.clue-reagent-panel {
+  display: none;
+  background: rgba(10, 8, 16, 0.9);
+  border: 1px solid var(--accent-emerald);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-top: 0.75rem;
+  animation: fadeInModal 0.3s ease;
+}
+
+.clue-card.reagent-active .clue-reagent-panel {
+  display: block;
+}
+
+.reagent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #a7f3d0;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  letter-spacing: 1px;
+}
+
+.reagent-reaction-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #d1fae5;
+  line-height: 1.4;
+}
+
+/* Alibi Contradiction Box */
+.clue-contradiction-box {
+  background: rgba(220, 38, 38, 0.08);
+  border-left: 3px solid #ef4444;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 0.9rem;
+  margin: 0.75rem 0;
+}
+
+.contradiction-header {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fca5a5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contradiction-body {
+  font-size: 0.82rem;
+  color: #fee2e2;
+  line-height: 1.45;
+}
+
+/* Clue Card Action Buttons Grid */
+.clue-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.btn-tool-action {
+  background: rgba(26, 21, 38, 0.85);
+  border: 1px solid var(--border-glass);
+  color: var(--text-white);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.btn-tool-action:hover {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: var(--accent-lavender);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-tool-action.active-tool {
+  background: var(--purple-primary);
+  border-color: #c084fc;
+  box-shadow: 0 0 12px var(--purple-glow);
+  color: #fff;
+}
+
+/* Security Lockout Modal Overlay */
+.lockout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 2, 8, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.lockout-modal-overlay.active {
+  display: flex;
+  animation: fadeInModal 0.3s ease;
+}
+
+.lockout-card {
+  max-width: 500px;
+  width: 100%;
+  background: rgba(18, 12, 24, 0.98);
+  border: 2px solid #ef4444;
+  border-radius: 12px;
+  padding: 2.2rem;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);
+}
+
+.lockout-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.7));
+}
+
+.lockout-card h3 {
+  font-family: var(--font-serif-display);
+  font-size: 1.5rem;
+  color: #f87171;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+}
+
+.lockout-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.btn-lockout-dismiss {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-lockout-dismiss:hover {
+  background: #dc2626;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
