@@ -974,6 +974,7 @@
     },
     cluesCollectedCount: 0,
     pinboardConnections: [],
+    solvedPinPairs: {},
     userNotes: '',
     selectedSuspect: 'librarian',
     selectedClueForInspection: null,
@@ -989,6 +990,9 @@
       if (saved) {
         const parsed = JSON.parse(saved);
         gameState = Object.assign(gameState, parsed);
+        if (!gameState.solvedPinPairs || typeof gameState.solvedPinPairs !== 'object') {
+          gameState.solvedPinPairs = {};
+        }
         if (!gameState.unlockedCases || !Array.isArray(gameState.unlockedCases) || gameState.unlockedCases.length === 0) {
           gameState.unlockedCases = ['CASE_001'];
         }
@@ -1632,17 +1636,39 @@
     }
 
     onClick(event) {
-      if (!this.hoveredObject || !this.hoveredObject.userData) return;
+      let targetObj = this.hoveredObject;
+      if (!targetObj && this.renderer && this.container) {
+        const rect = this.renderer.domElement.getBoundingClientRect();
+        const clientX = event.clientX || (event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientX : 0);
+        const clientY = event.clientY || (event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : 0);
+        if (clientX && clientY) {
+          const touchMouse = new THREE.Vector2(
+            ((clientX - rect.left) / rect.width) * 2 - 1,
+            -((clientY - rect.top) / rect.height) * 2 + 1
+          );
+          this.raycaster.setFromCamera(touchMouse, this.camera);
+          const intersects = this.raycaster.intersectObjects(this.clickableObjects, true);
+          if (intersects.length > 0) {
+            let obj = intersects[0].object;
+            while (obj.parent && !obj.userData.clueKey && !obj.userData.isAncientDoor) {
+              obj = obj.parent;
+            }
+            if (obj && obj.userData) targetObj = obj;
+          }
+        }
+      }
+
+      if (!targetObj || !targetObj.userData) return;
 
       // Jumpscare on Ancient Void Door click!
-      if (this.hoveredObject.userData.isAncientDoor) {
+      if (targetObj.userData.isAncientDoor) {
         triggerJumpscare('"THE ANCIENT VOID CONSUMES ALL WHO INTRUDE!"');
         return;
       }
 
       // Clue click
-      if (this.hoveredObject.userData.clueKey) {
-        const clueKey = this.hoveredObject.userData.clueKey;
+      if (targetObj.userData.clueKey) {
+        const clueKey = targetObj.userData.clueKey;
         audio.playClueStinger();
         openEvidenceModal(clueKey);
       }
@@ -1998,18 +2024,30 @@
     cluesList.innerHTML = '';
     suspectsList.innerHTML = '';
 
+    const solvedPairs = gameState.solvedPinPairs || {};
+
     Object.keys(CASE_DATA.clues).forEach(key => {
       const clue = CASE_DATA.clues[key];
       const isFound = gameState.caseProgress[currentCaseId].cluesFound[key];
+      const isSolvedForClue = !!solvedPairs[`${currentCaseId}_${key}_${CASE_DATA.solution.culpritId}`];
       const item = document.createElement('div');
-      item.className = `pin-node clue-node ${selectedPinClue === key ? 'selected' : ''}`;
+      item.className = `pin-node clue-node ${selectedPinClue === key ? 'selected' : ''} ${isSolvedForClue ? 'connected' : ''}`;
       item.dataset.clueKey = key;
-      item.onclick = () => { audio.playClick(); selectedPinClue = key; renderPinboard(); checkPinConnection(); };
+      item.onclick = () => {
+        audio.playClick();
+        if (selectedPinClue === key) {
+          selectedPinClue = null;
+        } else {
+          selectedPinClue = key;
+        }
+        renderPinboard();
+        checkPinConnection();
+      };
       item.innerHTML = `
         <img src="${clue.image}" class="pin-node-thumb" style="filter: ${isFound ? 'none' : 'grayscale(100%)'}">
         <div class="pin-node-info">
           <h4>${clue.name}</h4>
-          <p>${isFound ? clue.category : 'Undiscovered'}</p>
+          <p>${isFound ? clue.category : 'Undiscovered'} ${isSolvedForClue ? '<span class="pin-solved-tag">✓ LINKED</span>' : ''}</p>
         </div>
         <div class="pin-socket"></div>
       `;
@@ -2018,45 +2056,186 @@
 
     Object.keys(CASE_DATA.suspects).forEach(key => {
       const suspect = CASE_DATA.suspects[key];
+      const isCulprit = (key === CASE_DATA.solution.culpritId);
+      let linkedCluesCount = 0;
+      if (isCulprit) {
+        Object.keys(CASE_DATA.clues).forEach(cKey => {
+          if (solvedPairs[`${currentCaseId}_${cKey}_${key}`]) linkedCluesCount++;
+        });
+      }
       const item = document.createElement('div');
-      item.className = `pin-node suspect-node ${selectedPinSuspect === key ? 'selected' : ''}`;
+      item.className = `pin-node suspect-node ${selectedPinSuspect === key ? 'selected' : ''} ${linkedCluesCount > 0 ? 'connected' : ''}`;
       item.dataset.suspectKey = key;
-      item.onclick = () => { audio.playClick(); selectedPinSuspect = key; renderPinboard(); checkPinConnection(); };
+      item.onclick = () => {
+        audio.playClick();
+        if (selectedPinSuspect === key) {
+          selectedPinSuspect = null;
+        } else {
+          selectedPinSuspect = key;
+        }
+        renderPinboard();
+        checkPinConnection();
+      };
       item.innerHTML = `
         <div class="pin-socket"></div>
         <img src="${suspect.image}" class="pin-node-thumb">
         <div class="pin-node-info">
           <h4>${suspect.name}</h4>
-          <p>${suspect.role}</p>
+          <p>${suspect.role} ${linkedCluesCount > 0 ? `<span class="pin-solved-tag">✓ ${linkedCluesCount} LINK(S)</span>` : ''}</p>
         </div>
       `;
       suspectsList.appendChild(item);
     });
 
     renderConnectionsLog();
+    setTimeout(drawPinboardStrings, 40);
+  }
+
+  function drawPinboardStrings() {
+    const svg = document.getElementById('pinboard-svg');
+    const container = document.querySelector('.pinboard-container');
+    if (!svg || !container) return;
+
+    const contRect = container.getBoundingClientRect();
+    if (contRect.width === 0 || contRect.height === 0) return;
+
+    svg.setAttribute('width', contRect.width);
+    svg.setAttribute('height', contRect.height);
+    svg.setAttribute('viewBox', `0 0 ${contRect.width} ${contRect.height}`);
+    svg.innerHTML = '';
+
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    defs.innerHTML = `
+      <filter id="string-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2.5" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    `;
+    svg.appendChild(defs);
+
+    const solvedPairs = gameState.solvedPinPairs || {};
+    Object.keys(solvedPairs).forEach(key => {
+      if (solvedPairs[key] && key.startsWith(currentCaseId + '_')) {
+        const parts = key.split('_');
+        const clueKey = parts[1];
+        const suspectKey = parts[2];
+        const clueSocket = document.querySelector(`.clue-node[data-clue-key="${clueKey}"] .pin-socket`);
+        const suspectSocket = document.querySelector(`.suspect-node[data-suspect-key="${suspectKey}"] .pin-socket`);
+        if (clueSocket && suspectSocket) {
+          const r1 = clueSocket.getBoundingClientRect();
+          const r2 = suspectSocket.getBoundingClientRect();
+          const x1 = r1.left + r1.width / 2 - contRect.left;
+          const y1 = r1.top + r1.height / 2 - contRect.top;
+          const x2 = r2.left + r2.width / 2 - contRect.left;
+          const y2 = r2.top + r2.height / 2 - contRect.top;
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const dx = Math.abs(x2 - x1) * 0.45;
+          const dy = (y2 - y1) * 0.2;
+          const d = `M ${x1} ${y1} C ${x1 + dx} ${y1 + dy + 20}, ${x2 - dx} ${y2 - dy + 20}, ${x2} ${y2}`;
+          path.setAttribute('d', d);
+          path.setAttribute('stroke', '#dc2626');
+          path.setAttribute('stroke-width', '3');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('fill', 'none');
+          path.setAttribute('filter', 'url(#string-glow)');
+          path.style.opacity = '0.95';
+          svg.appendChild(path);
+
+          [[x1, y1], [x2, y2]].forEach(([px, py]) => {
+            const pin = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            pin.setAttribute('cx', px);
+            pin.setAttribute('cy', py);
+            pin.setAttribute('r', '5');
+            pin.setAttribute('fill', '#ef4444');
+            pin.setAttribute('stroke', '#fbbf24');
+            pin.setAttribute('stroke-width', '1.5');
+            svg.appendChild(pin);
+          });
+        }
+      }
+    });
+
+    // Draw active dashed thread from selected clue
+    if (selectedPinClue && !selectedPinSuspect) {
+      const clueSocket = document.querySelector(`.clue-node[data-clue-key="${selectedPinClue}"] .pin-socket`);
+      if (clueSocket) {
+        const r1 = clueSocket.getBoundingClientRect();
+        const x1 = r1.left + r1.width / 2 - contRect.left;
+        const y1 = r1.top + r1.height / 2 - contRect.top;
+        const x2 = contRect.width * 0.5;
+        const y2 = y1;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M ${x1} ${y1} Q ${x1 + (x2 - x1) * 0.5} ${y1 + 30}, ${x2} ${y2}`);
+        path.setAttribute('stroke', '#fbbf24');
+        path.setAttribute('stroke-width', '2.5');
+        path.setAttribute('stroke-dasharray', '6,5');
+        path.setAttribute('fill', 'none');
+        svg.appendChild(path);
+      }
+    }
   }
 
   function checkPinConnection() {
     if (selectedPinClue && selectedPinSuspect) {
       const isCorrect = (selectedPinSuspect === CASE_DATA.solution.culpritId);
       let explanation = '';
+      let isAlreadyAwarded = false;
+
+      // Unique identifier for this connection in current case
+      const connectionKey = `${currentCaseId}_${selectedPinClue}_${selectedPinSuspect}`;
+      if (!gameState.solvedPinPairs) {
+        gameState.solvedPinPairs = {};
+      }
+
+      // Check if this correct clue-to-suspect connection was already solved & scored
+      if (gameState.solvedPinPairs[connectionKey] ||
+          gameState.pinboardConnections.some(c => c.caseId === currentCaseId && c.clueKey === selectedPinClue && c.suspectKey === selectedPinSuspect && c.isCorrect)) {
+        isAlreadyAwarded = true;
+      }
 
       if (isCorrect) {
-        audio.playSuccessChime();
-        gameState.score += 50;
-        explanation = `MATCH CONFIRMED: Forensic evidence directly links ${CASE_DATA.suspects[selectedPinSuspect].name} to ${CASE_DATA.clues[selectedPinClue].name}! (+50 pts)`;
+        if (!isAlreadyAwarded) {
+          // Award points once
+          audio.playSuccessChime();
+          gameState.score += 50;
+          gameState.solvedPinPairs[connectionKey] = true;
+          explanation = `MATCH CONFIRMED: Forensic evidence directly links ${CASE_DATA.suspects[selectedPinSuspect].name} to ${CASE_DATA.clues[selectedPinClue].name}! (+50 pts)`;
+        } else {
+          // Already awarded, do NOT add points repeatedly!
+          audio.playClick();
+          explanation = `CORRELATION CONFIRMED: Forensic link between ${CASE_DATA.suspects[selectedPinSuspect].name} and ${CASE_DATA.clues[selectedPinClue].name} is already logged in the case dossier. (+0 pts - already awarded)`;
+        }
       } else {
         audio.playClick();
         explanation = `MISMATCH: Evidence contradiction clears ${CASE_DATA.suspects[selectedPinSuspect].name}. Their alibi contradicts this clue.`;
       }
 
-      gameState.pinboardConnections.unshift({
-        caseTitle: CASE_DATA.title,
-        clueName: CASE_DATA.clues[selectedPinClue].name,
-        suspectName: CASE_DATA.suspects[selectedPinSuspect].name,
-        isCorrect,
-        explanation
-      });
+      // Prevent duplicate identical consecutive entries in the log
+      const lastEntry = gameState.pinboardConnections[0];
+      const isConsecutiveDuplicate = lastEntry &&
+        lastEntry.caseId === currentCaseId &&
+        lastEntry.clueKey === selectedPinClue &&
+        lastEntry.suspectKey === selectedPinSuspect;
+
+      if (!isConsecutiveDuplicate) {
+        gameState.pinboardConnections.unshift({
+          caseId: currentCaseId,
+          clueKey: selectedPinClue,
+          suspectKey: selectedPinSuspect,
+          connectionKey,
+          caseTitle: CASE_DATA.title,
+          clueName: CASE_DATA.clues[selectedPinClue].name,
+          suspectName: CASE_DATA.suspects[selectedPinSuspect].name,
+          isCorrect,
+          isAlreadyAwarded,
+          explanation
+        });
+      }
 
       selectedPinClue = null;
       selectedPinSuspect = null;
@@ -2074,14 +2253,14 @@
       return;
     }
 
-    list.innerHTML = gameState.pinboardConnections.slice(0, 5).map(c => `
+    list.innerHTML = gameState.pinboardConnections.slice(0, 6).map(c => `
       <div class="connection-item ${c.isCorrect ? 'correct' : 'incorrect'}">
         <div>
           <strong>[${c.caseTitle}] ${c.clueName} ➔ ${c.suspectName}</strong>
           <p style="margin-top: 0.2rem; color: var(--text-white);">${c.explanation}</p>
         </div>
-        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: ${c.isCorrect ? 'var(--accent-emerald)' : 'var(--accent-crimson)'}; font-weight: 700;">
-          ${c.isCorrect ? '+50 PTS CONFIRMED' : 'MISMATCH'}
+        <span style="font-family: var(--font-mono); font-size: 0.72rem; color: ${c.isCorrect ? (c.isAlreadyAwarded ? 'var(--accent-lavender)' : 'var(--accent-emerald)') : 'var(--accent-crimson)'}; font-weight: 700;">
+          ${c.isCorrect ? (c.isAlreadyAwarded ? 'LOGGED (ALREADY AWARDED)' : '+50 PTS CONFIRMED') : 'MISMATCH'}
         </span>
       </div>
     `).join('');
@@ -2772,17 +2951,32 @@
     document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const view = btn.dataset.view;
-        if (view) switchView(view);
+        if (view) {
+          switchView(view);
+          const navLinks = document.getElementById('nav-links');
+          if (navLinks) navLinks.classList.remove('open');
+        }
       });
     });
 
     const mobileToggle = document.getElementById('mobile-nav-toggle');
     if (mobileToggle) {
-      mobileToggle.addEventListener('click', () => {
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         const navLinks = document.getElementById('nav-links');
         if (navLinks) navLinks.classList.toggle('open');
       });
     }
+
+    document.addEventListener('click', (e) => {
+      const navLinks = document.getElementById('nav-links');
+      const mobileToggle = document.getElementById('mobile-nav-toggle');
+      if (navLinks && navLinks.classList.contains('open')) {
+        if (!navLinks.contains(e.target) && (!mobileToggle || !mobileToggle.contains(e.target))) {
+          navLinks.classList.remove('open');
+        }
+      }
+    });
 
     // Landing Page Actions
     const btnStart = document.getElementById('btn-start-investigation');
@@ -2877,8 +3071,26 @@
         document.getElementById('evidence-tab-clues').style.display = 'none';
         document.getElementById('evidence-tab-pinboard').style.display = 'block';
         renderPinboard();
+        setTimeout(drawPinboardStrings, 60);
       });
     }
+
+    window.addEventListener('resize', () => {
+      const pinTab = document.getElementById('evidence-tab-pinboard');
+      if (pinTab && pinTab.style.display !== 'none') {
+        drawPinboardStrings();
+      }
+    });
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        if (threeApp) threeApp.onResize();
+        const pinTab = document.getElementById('evidence-tab-pinboard');
+        if (pinTab && pinTab.style.display !== 'none') {
+          drawPinboardStrings();
+        }
+      }, 200);
+    });
 
     const notesTextarea = document.getElementById('user-notes-textarea');
     if (notesTextarea) {
